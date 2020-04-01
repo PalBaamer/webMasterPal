@@ -1,0 +1,82 @@
+CREATE TABLE profesor(
+id_profesor int (3) AUTO_INCREMENT primary key,
+nombre varchar(20)NOT NULL,
+apellido1 varchar (30),
+apellido2 varchar (20),
+dni varchar (9),
+usuario varchar (30),
+pswd varchar (30)
+);
+
+CREATE TABLE curso(
+id_curso int (3) AUTO_INCREMENT primary key,
+nombre varchar(20)NOT NULL,
+id_profesor varchar (30),
+constraint prof_responsable_curso foreign key (id_profesor) references profesor(id_profesor)
+);
+
+CREATE TABLE alumno(
+id_alumno int (3) AUTO_INCREMENT primary key,
+nombre varchar(20)NOT NULL,
+apellido1 varchar (30),
+apellido2 varchar (20),
+dni varchar (9),
+usuario varchar (30),
+pswd varchar (30)
+);
+
+CREATE TABLE alumno_accede_curso(
+id_alumno,
+id_curso,
+constraint alumno_tiene_curso foreign key (id_alumno) references profesor(alumno),
+constraint curso_tiene_alumno foreign key (id_curso) references profesor(curso)
+);
+
+
+CREATE TABLE alumno_tiene_profesor(
+id_alumno,
+id_profesor,
+constraint alumno_tiene_curso foreign key (id_alumno) references profesor(alumno),
+constraint curso_tiene_alumno foreign key (id_profesor) references profesor(profesor)
+);
+
+CREATE TABLE tema(
+id_tema int (3) AUTO_INCREMENT primary key,
+nota int (2),
+curso,
+constraint tema_pertenece_curso foreign key (curso) references curso(id_curso),
+
+);
+
+CREATE TABLE leccion(
+id_leccion int (3) AUTO_INCREMENT primary key,
+estructura vachar(12000)
+);
+
+
+
+CREATE TABLE leccion(
+id_recurso int (3) AUTO_INCREMENT primary key,
+recurso vachar(12000)
+);
+
+
+CREATE TABLE examen(
+id_examen int (3) AUTO_INCREMENT primary key,
+puntos int (2),
+resutlado int (2),
+preguntas varchar (400),
+respuestas varchar(400),
+id_alumno,
+id_tema
+
+);
+
+
+
+
+
+
+
+
+

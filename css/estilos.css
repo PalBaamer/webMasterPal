@@ -1,0 +1,136 @@
+body {
+	padding-top: 5rem;
+  }
+  h1{
+    margin-top: 10%;
+
+}
+#tablaPideCita{
+	margin-top: 10%;
+}
+#historial{
+	margin-top: 50%;
+}
+  
+  .starter-template {
+	padding: 3rem 1.5rem;
+	text-align: center;
+  }
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+#historial{
+	grid-row-start: 1;
+	grid-row-end: 3;
+  margin-top: 2%; 
+  float: left;
+   margin-left:57px; 
+   width: 90%; 
+   border: #E0E0E0 solid 1px; 
+   height: 33%; 
+  background-color:#EEEEEE;}
+  .loginCampo{
+	margin-top: 15%;
+  }
+/*-------------------------------LOGIN-----------------------------------
+		
+		
+  .loginCampo{
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin-top: 5%;
+	text-align: center;
+
+}
+		.cabecera{
+  		display: grid;
+  		grid-template-columns: auto auto;
+  		grid-gap: 50px;
+  		background-color: #A5ABA5;
+		  padding: 10px;
+		  margin-bottom: 10%;
+		}
+		.cabecera > div {
+  		background-color:white;
+  		text-align: center;
+  		padding: 20px 0;
+  		font-size: 18px;
+}
+
+		
+
+		#tablaAdmin{
+			width:100%;
+			margin-top:70%;
+			
+			
+		}
+
+		.custom-select{
+			background-color:#B0DFF7 ;
+
+		}
+		.table{
+			display: block;
+  			overflow-x: auto;
+		}		
+
+
+		.empresa{
+			margin: 50%;
+			padding:20px;
+			background-color:#B0DFF7 ;
+		}
+		.interprete{
+			background-color:#DAF7A6 ;
+		}
+		.usuario{
+			background-color:#F1F794 ;
+		}
+
+		.nombreDatos{
+			position: absolute;
+  			left: 100px;
+  			top: 80px;
+
+		}
+
+		#verEmpresa{
+			margin-top:40%;
+
+		}
+		.tablaVerEmpresa{
+			position: absolute;
+  			background-color: white;
+			left: 100px;
+  			top: 500px;
+		}
+*/

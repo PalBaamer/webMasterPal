@@ -1,0 +1,92 @@
+
+    /* FUENTES IMPORTADAS */
+@font-face {
+    font-family: moon;
+    src: url("../fuentes/Moon Bold.otf");
+    }
+
+@font-face {
+    font-family: segoe1;
+    src: url("../fuentes/Segoe UI Bold.ttf");
+    }
+
+@font-face {
+    font-family: segoe2;
+    src: url("../fuentes/Segoe UI.ttf");
+    }
+	
+
+    /*  HOME Y FUNCIONALIDAD  */
+ #logo{width: 5.5%; height: 80%; margin-top: 0.2%;  float: left;  }
+ #titulo{background-color: black; border: black 1px solid; height: 12%;}
+
+ #registro{font-family:'segoe1'; margin-left: 55%; background-color: #FADA5E; border-color: #FADA5E; border-radius: 10px;
+ width: 10%; height: 50%;}
+ 
+ .btn{margin-left:55%; background-color: #007bff;; border-color: #007bff;; border-radius: 10px; color:white; font-weight:bold;}
+ .btn:hover{background-color:white; color:black;}
+
+ #log{ color:white; font-family:'segoe1'; margin-left: 0.5%; background-color: #007bff; border-color: #007bff; border-radius: 10px;
+ width: 8%; height: 49%;}
+
+ #registro:hover{background-color:white; border-color: white;}
+ #log:hover{background-color:white; border-color: white;}
+
+ #uno{background-color:white; margin:0; background-repeat: no-repeat;
+ background-position: center bottom;}
+ 
+ #skype{display:block; margin:auto;}
+ 
+ #cuatro{background-color:#00BFA5;}
+ 
+ #dos{background-color:#E0E0E0;}
+
+ #cita1{font-family:'segoe2'; color:black; font-size:200%; margin-left:10%;}
+ #cita2{font-family:'segoe1'; color:black; font-size:240%; margin-left:10%;}
+ 
+ #cita3{font-family:'segoe2'; color:Black; font-size:200%; margin-left:20%;}
+ #cita4{font-family:'segoe1'; color:Black; font-size:240%; margin-left:35%;}
+ 
+	/* MAQUETACIÓN PERFIL USUARIO */
+ #contenedorPadre{width: 100%; background-color:#E0E0E0; height: 61%;}
+ #contenedorCita{ margin-left: 57px; float: left;  width: 65%; border: #E0E0E0 solid 1px;
+    height: 50%; background-color:#EEEEEE; }
+ #contenedorEmergencia{ margin-right: 3%; float: right; width: 25%; border:  #E0E0E0 solid 1px;
+    height: 90%; background-color:#EEEEEE;}
+#contenedorHistorial{margin-top: 2%; float: left; margin-left:57px; width: 65%; border: #E0E0E0 solid 1px; height: 33%; background-color:#EEEEEE;}
+
+	/* MAQUETACIÓN PERFIL INTERPRETE */
+#contenedorCita2{margin-left: 57px; float: left;  width: 90%; border: #E0E0E0 solid 1px;
+    height: 50%; background-color:#EEEEEE;}
+#contenedorHistorial2{margin-top: 2%; float: left; margin-left:57px; width: 90%; border: #E0E0E0 solid 1px; height: 33%; background-color:#EEEEEE;}
+
+ #myTabContent div{overflow: hidden; background-color: #252850;   border-radius: 10px;
+ text-align: center;}
+ 
+ #interprete{width:30%; margin-left:30%;}
+ 
+ #myTabContent2 div{overflow: hidden; background-color: #252850; margin:10px auto; width:20%; height:40%; border-radius: 10px;
+ text-align: center;}
+
+ .nav-link{color:black; background-color: #FADA5E; border-radius: 10px;}
+ .nav-link:hover{background-color: white; color: black;}
+
+ a:hover{color: white;}
+ 
+ ::placeholder{color:#E0E0E0;}
+ 
+    /* FORMULARIOS DE REGISTRO */
+#logo2{width: 8%; height: 15%;}
+#logo3{width: 25%; height: 25%;}
+
+input[type="text"]{ background-color: #252850; border-left:none; border-top:none; border-right:none; color:white;}
+
+#boton1{border-radius: 20%; background-color:white; border-color:white; font-weight:bold;}
+#boton2{border-radius: 20%; background-color:white; border-color:white; font-weight:bold;}
+
+#datoslogin{border: 3px solid black; width: 40%; margin: auto;}
+
+#sordo{height: 25%; width:20%;}
+
+
+ 

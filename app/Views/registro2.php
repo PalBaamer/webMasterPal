@@ -23,6 +23,7 @@
     
       <label for="inputApellido" class="sr-only">APELLIDO </label>
   <input type="text" class="form-control" name="inputApellido" placeholder="Apellido" >
+  
   <label for="inputApellido2" class="sr-only">APELLIDO2 </label>
     <input type="text" class="form-control" name="inputApellido2" placeholder="Apellido2" >
 

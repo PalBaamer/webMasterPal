@@ -18,52 +18,7 @@ class loginProfesor extends BaseController{
 
 	}
 
-	
-	public function validarProfesor(){
 
-		$profesorM = new profesorModelo();	
-
-		helper('cookie');
-		helper('array');
-		$mail = $this->request->getVar('inputEmail');
-		
-		$pswd = $this->request->getVar('inputPassword');
-		//$pswd = sha1($this->input->post('inputPassword'));
-
-
-		if($mail == null || $pswd==null){
-
-			return view('cabeceraBasica').view('loginProfesor').view('campoNull');
-
-
-		}else{ 						
-			/*$r = $profesorM->prueba();
-			var_dump($r);*/
-			$profesor = $profesorM->profesorLogin($mail,$pswd);
-			
-			if($profesor!= null){
-				
-				set_cookie($cookie='datosSesion',$valor=serialize($profesor),$expire=12000);
-
-					/*$set_ookie = array(
-						'name'   => 'datosSesion',
-						'value'  =>serialize($profesor),                            
-						'expire' => '12000',                                                                                   
-						'secure' => FALSE
-						);*/
-						
-				$datos['profesorDatos']=$profesor;
-				//var_dump($profesor);die;
-					return view('cabecera').view('menuProfesor',$datos);
-				
-
-			}else{
-			return view('cabeceraBasica').view('loginProfesor').view('ErrorLogin');
-
-			
-		}
-	} 
-}
 
 public function registro(){
 	helper('array');
@@ -120,7 +75,7 @@ public function registroUsuario(){
 		$profesorInsertado= $profesorM->insertar_profesor($usuario);
 		 if($profesorInsertado!=null){
 			set_cookie($cookie='datosSesion',$valor=serialize($usuario),$expire=12000);
-			$profesor = $profesorM->profesorLogin($usuario['email'],$usuario['pswd']);
+			$profesor = $profesorM->profesor_login($usuario['email'],$usuario['pswd']);
 
 			$datos['profesorDatos']=$profesor;
 			return view('cabecera').view('menuProfesor',$datos);

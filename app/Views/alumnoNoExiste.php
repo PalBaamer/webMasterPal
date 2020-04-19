@@ -2,9 +2,8 @@
 <html>
 <head>
 <script>
-  
 function error() {
-  alert("El usuario no existe verifica tus datos , verifica si está intentando entrar desde PROFESOR o ALUMNO");
+  alert("El alumno no está en ninguno de sus cursos o no existe");
 }
 </script>
 </head>

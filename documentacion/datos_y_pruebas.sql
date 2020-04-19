@@ -7,11 +7,40 @@ where profesor.id_profesor=curso.id_profesor and curso.id_curso=alumno_accede_cu
 ----Los cursos que tiene el profesor =1-----
 select * from curso,alumno_accede_curso where curso.id_curso= alumno_accede_curso.id_curso and curso.id_profesor =1;
 
+select curso.id_curso,curso.nombre, count(id_alumno)as nAlumnos from curso,alumno_accede_curso where curso.id_curso= alumno_accede_curso.id_curso and curso.id_profesor =1 group by id_curso;
+
+---------
+
 ---Seleciona los alumnos en los cursos que imparte el profesor con id =3----
 
 select distinct curso.id_curso,curso.nombre,alumno.nombre 
 from curso,alumno_accede_curso,alumno 
-where curso.id_curso= alumno_accede_curso.id_curso and alumno_accede_curso.id_alumno=alumno.id_alumno  and curso.id_profesor =3;
+where curso.id_curso= alumno_accede_curso.id_curso and alumno_accede_curso.id_alumno=alumno.id_alumno and curso.id_profesor =3 ;
+
+
+--------
+
+---Selecciona el alumno "ramona" que está haciendo los cursos del profe 3-----
+select distinct curso.id_curso,curso.nombre,alumno.nombre 
+from curso,alumno_accede_curso,alumno 
+where curso.id_curso= alumno_accede_curso.id_curso and alumno_accede_curso.id_alumno=alumno.id_alumno and curso.id_profesor =3 and alumno.nombre="ramona";
+
+---Seleciona los alumnos en el PHP(4) curso que imparte el profesor con id =3----
+
+select distinct curso.id_curso,curso.nombre,alumno.nombre 
+from curso,alumno_accede_curso,alumno 
+where curso.id_curso= alumno_accede_curso.id_curso and alumno_accede_curso.id_alumno=alumno.id_alumno and curso.id_profesor =1 and curso.id_curso =4;
+
+----Datos alumno X que está en el curso del profesor X;
+select distinct alumno.nombre,alumno.apellido1,alumno.apellido2,alumno.telefono,alumno.email
+from curso,alumno_accede_curso,alumno 
+where curso.id_curso= alumno_accede_curso.id_curso and alumno_accede_curso.id_alumno=alumno.id_alumno and curso.id_profesor =1 and alumno.nombre="ramona";
+
+-------Selecciona del id_curos X los temas y lecciones que tiene--------
+
+
+
+
 
 insert into alumno values(3,'Basi','Lisa','Cano','00000000A','Basi','1234basi','basi@basi.com');
 insert into alumno values(4,'Ramona','Ruiz','Hermosa','11111111B','Ramona','1234ramona','ramona@ramona.com');
@@ -115,3 +144,135 @@ update provincia set id_autonomia=4 where id_provincia=7;
 
 alter table profesor add telefono int(9) after telefono;
 alter table profesor drop direccion;
+
+alter table tema add nombre varchar(35) after id_tema;
+insert into tema values(1,"Introducción",2);
+alter table tema MODIFY nombre varchar(35);
+insert into curso values(5,"Manejo Windows",1);
+insert into tema values(1,"Introducción",5);
+insert into tema(nombre,id_curso)values("Papelera",5);
+insert into tema(nombre,id_curso)values("Disco dduro y USB",5);
+insert into tema(nombre,id_curso)values("Google",5);
+insert into tema(nombre,id_curso)values("Gmail",5);
+insert into tema(nombre,id_curso)values("Fotos_google",5);
+insert into tema(nombre,id_curso)values("Ubicacion_google",5);
+
+insert into tema (nombre,id_curso)values("Introduccion",2);
+insert into tema (nombre,id_curso)values("Variables",2);
+select c.id_curso,c.nombre as nombreCurso ,t.id_tema,t.nombre as nombreTema 
+from curso c join tema t using (id_curso) where c.id_profesor=1 and c.id_curso=5 ;
+
+delete from tema where id_tema=1;
+
+select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE TABLE_NAME='leccion';
+
+alter table recurso drop foreign key recurso_del_tema;
+alter table leccion drop foreign key primary;
+alter table leccion drop primary key PRIMARY;
+alter table leccion drop constraint PRIMARY;
+
+alter table recurso drop id_leccion;
+ALTER TABLE recurso add id_tema int(3)not null after id_recurso;
+ALTER TABLE recurso ADD constraint recurso_pertenece_tema FOREIGN KEY (id_tema) REFERENCES tema(id_tema);
+
+alter table recurso modify column recurso recurosHTML longtext;
+alter table recurso MODIFY recurso LONGTEXT;
+ALTER COLUMN id_leccion id_tema LONGTEXT;
+
+insert into recurso ( id_tema,recurso)values(18,"<!doctype html>
+<html >  <head>
+  <title>webMasterPal</title>
+  </head>
+<body>
+	<div class='container'>
+	prueba discoDuros y USB
+	</div>
+	</body>
+	</html>");
+
+
+insert into recurso values(1,17,"<!doctype html>
+<html lang='es'>  <head>
+  <title>webMasterPal</title>
+  </head>
+<body>
+	<div class='container'>
+	hola
+	</div>
+	</body>
+	</html>");
+
+insert into recurso (id_tema,recurso)values(12,"<!doctype html>
+<html lang='es'>  <head>
+  <title>webMasterPal</title>
+  </head>
+<body>
+	<div class='container'>
+	prueba discoDuros y USB
+	</div>
+	</body>
+	</html>");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			$('#txtContent').Editor();
+
+			$('#txtContent').Editor('setText', ['<p style="color:red;">Hola</p>']);
+
+			$('#btn-enviar').click(function(e){
+				e.preventDefault();
+				$('#txtContent').text($('#txtContent').Editor('getText'));
+				$('#frm-test').submit();				
+			});
+		});	
+	</script>
+
+    <!-- Custom styles for this template -->
+  </head>
+
+<body class="text-center">
+<a href="<?php echo site_url('menuProfesor/index'); ?>" class="btn btn-secondary btn-lg " tabindex="-1" role="button" aria-disabled="true">Atrás</a>
+
+<input id="id_curso" name="id_curso" type="hidden" value="<?php echo $id_curso ?>">
+    <div class="container">
+		<div class="row">
+			<div class="col-sm-8">
+                <form action="<?php echo site_url('menuProfesor/pruebaHTML'); ?>" method="post" id="frm-test">
+					<div class="form-group">
+						<textarea id="txtContent" name="txtContent"></textarea>
+                    
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" >Enviar</button>
+
+
+                    
+                </form>
+			</div>
+        </div>

@@ -23,7 +23,7 @@ function hideLogin() {
     <main role="main" class="container">
     </header>
 <section class="loginCampo">                             
-  <form id="" class="form-signin " method='POST' action="<?php echo site_url('loginProfesor/validarProfesor'); ?>">
+  <form id="" class="form-signin " method='POST' action="<?php echo site_url('menuProfesor/validar_profesor'); ?>">
 
       <h1 class="h3 mb-3 font-weight-normal">Inicia Sesión</h1>
       <label for="inputEmail" class="sr-only">Email </label>

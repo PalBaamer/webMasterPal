@@ -162,7 +162,7 @@
                               echo '
                               <tr>
                                 <td scope="row">'.$nlinea.'</td>
-                                <td  align="left"> '.$valor->nombreTema.'<a href=#>&nbsp &nbspEditar</a></td>
+                                <td  align="left"> '.$valor->nombreTema.'<a href='.site_url('menuProfesor/verTema?id_tema='.$valor->id_tema.'').'>&nbsp &nbspVer</a><a href=#>&nbsp &nbspEditar</a><a href="'.site_url('menuProfesor/borrarTema?id_tema='.$valor->id_tema.'').'">&nbsp &nbspBorrar</a></td>
                                 <td align="left">Ex<a href=#>&nbsp &nbspEditar</a></td>
                               </tr>';
                               }

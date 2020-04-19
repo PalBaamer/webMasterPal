@@ -19,7 +19,7 @@ class menuProfesor extends BaseController{
          $datos['profesorDatos']=$profesorDato;
          $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($profesorDato->id_profesor);
         $datos['cursos']=$this->buscar_curso($profesorDato->id_profesor);
-		return view('cabecera').view('menuProfesor',$datos);
+		return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
     }
 
 
@@ -88,7 +88,7 @@ class menuProfesor extends BaseController{
 
 		if($mail == null || $pswd==null){
 
-			return view('cabeceraBasica').view('loginProfesor').view('campoNull');
+			return view('cabeceraBasica').view('loginProfesor').view('campoNull').view('pie');
 
 
 		}else{ 						
@@ -110,11 +110,11 @@ class menuProfesor extends BaseController{
                 $datos['profesorDatos']=$profesor;
                 $datos['cursos']=$this->buscar_cursos_y_alumnos($profesor->id_profesor);
 				//var_dump($profesor);die;
-					return view('cabecera').view('menuProfesor',$datos);
+					return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
 				
 
 			}else{
-			return view('cabeceraBasica').view('loginProfesor').view('ErrorLogin');
+			return view('cabeceraBasica').view('loginProfesor').view('ErrorLogin').view('pie');
 
 			
 		}
@@ -144,14 +144,14 @@ class menuProfesor extends BaseController{
 
                // var_dump($datos['cursos']);die;
                // var_dump($datos);die;
-                return view('cabecera').view('menuProfesor',$datos);
+                return view('cabecera',$datos).view('menuProfesor',$datos);
             }else{
             //var_dump($datos);die;
-                return view('cabecera').view('alumnoNoExiste').view('menuProfesor',$datos);
+                return view('cabecera',$datos).view('alumnoNoExiste').view('menuProfesor',$datos).view('pie');
             }
 
         }else{
-            return view('cabecera').view('menuProfesor',$datos).view('campoVacio');
+            return view('cabecera',$datos).view('menuProfesor',$datos).view('campoVacio').view('pie');
         }
     }
 
@@ -176,7 +176,7 @@ class menuProfesor extends BaseController{
             $datos['error']='El curso está vacío porfavor agregue contenido';
 
             //var_dump($datos['error']);die;
-            return view('cabecera',$datos).view('menuProfesor',$datos);
+            return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
         }
 
     }
@@ -221,16 +221,27 @@ class menuProfesor extends BaseController{
             $datos['error']='Se ha guardado correctamente el tema';
 
             //var_dump($datos['error']);die;
-            return view('cabecera').view('menuProfesor',$datos);
+            return view('cabecera').view('menuProfesor',$datos).view('pie');
         }else{
             $datos['error']='NO se ha guardado el tema';
 
             //var_dump($datos['error']);die;
-            return view('cabecera').view('menuProfesor',$datos);
+            return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
 
         }
     }
 
+    public function verTema(){
+        $id_profesor=$this->id_profesor();
+        $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
+        $datos['cursos']=$this->buscar_curso($id_profesor);
+        $datos['profesorDatos']=$this->recuperar_cookie();
+        $profesorM = new profesorModelo();
+        
+        $id_tema= $this->request->getVar('id_tema');
+        
+        return view('cabecera',$datos).view('prueba',$datos).view('pie');
+    }
 
 
 

@@ -44,7 +44,7 @@
 			<section>
 				<article>
         <div id="maestranza"  class="starter-template">
-        <iframe width="560" height="315" src="https://www.youtube.com/watch?v=Gw11f2hMKWA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Gw11f2hMKWA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 								<h3>Real Maestranza de Caballeriza</h3>
 								<div>
 									Construida entre 1761 y 1880 fue diseñada por el arquitecto Vicente San Martín en 1758. En su interior se aloja el museo taurino. La plaza es de planta casi circular
@@ -89,7 +89,7 @@
 							</div>
 							<div id="acueducto">
                 <h3>Acueducto</h3>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/L-X3LWxRewA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <<iframe width="560" height="315" src="https://www.youtube.com/embed/Gw11f2hMKWA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 								<div>
 									Actualmente, en Sevilla podemos ver tres tramos de un antiguo acueducto que data de la época imperial romana en la que Julio César mandó amurallar la ciudad. Este acueducto se 
 									conoce como “Los caños de Carmona”, aunque el agua no procedía del municipio, sino del manantial de Santa Lucía en Alcalá de Guadaira. Sin embargo, el acueducto finalizaba en la 

@@ -178,7 +178,21 @@ ALTER TABLE recurso ADD constraint recurso_pertenece_tema FOREIGN KEY (id_tema) 
 alter table recurso modify column recurso recurosHTML longtext;
 alter table recurso MODIFY recurso LONGTEXT;
 ALTER COLUMN id_leccion id_tema LONGTEXT;
-
+delete from tema where id_tema=41;
+delete from tema where id_tema=42;
+delete from tema where id_tema=43;
+delete from tema where id_tema=44;
+delete from tema where id_tema=34;
+delete from tema where id_tema=33;
+delete from tema where id_tema=32;
+delete from tema where id_tema=31;
+delete from tema where id_tema=30;
+delete from tema where id_tema=29;
+delete from tema where id_tema=28;
+delete from tema where id_tema=27;
+delete from tema where id_tema=26;
+delete from tema where id_tema=25;
+delete from tema where id_tema=24;
 insert into recurso ( id_tema,recurso)values(18,"<!doctype html>
 <html >  <head>
   <title>webMasterPal</title>

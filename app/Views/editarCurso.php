@@ -32,7 +32,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8">
-				<form action="<?php echo site_url('menuProfesor/pruebaHTML?id_tema='.$id_tema.'');?>" method="post" id="frm-test">
+				<form action="<?php echo site_url('menuProfesor/prueba?id_tema='.$id_tema.'');?>" method="post" id="frm-test">
 					<div class="form-group">
 
 						<textarea id="txt-content" name="txt-content"></textarea>

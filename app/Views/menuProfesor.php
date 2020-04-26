@@ -31,14 +31,18 @@
                               <li><a href="#tabs-3">Editar Curso</a></li>
                             </ul>
                           <div id="tabs-1">
-                            <form class="form">
+                            <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/crearCurso'); ?>">
+                            <h3 class="h3 mb-3 font-weight-normal">Introduce el nombre del curso :</h3>
+                            <input type="text" class="form-control" name="inputInsertCurso" placeholder="Nombre del curso">
+                            <h3 class="h3 mb-3 font-weight-normal">Introduce el nombre del tema :</h3>
+                            <input type="text" class="form-control" name="inputInsertTema" placeholder="Nombre del primer tema ">
                               <p> <input type="submit" value="Crear"></p>
                             </form>
                           </div>
 
                           <div id="tabs-2">
                                 <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/buscar_alumno'); ?>">
-                                <h3 class="h3 mb-3 font-weight-normal">Inserta el nombre alumno</h3>
+                                <h3 class="h3 mb-3 font-weight-normal">Escribe el nombre alumno</h3>
 
                                 <label for="inputAlumno" class="sr-only">Nombre del alumno</label>
                                   <input type="text" class="form-control" name="inputAlumno" placeholder="Nombre">

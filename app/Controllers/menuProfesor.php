@@ -121,6 +121,32 @@ class menuProfesor extends BaseController{
 	} 
 }
 
+public function crearCurso(){
+    helper('cookie');
+		helper('array');
+        $profesorM = new profesorModelo();
+        $profesorDato = unserialize($this->request->getCookie('datosSesion'));
+        $datos['profesorDatos']=$profesorDato;
+        $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($profesorDato->id_profesor);
+        $datos['cursos']=$this->buscar_curso($profesorDato->id_profesor);
+
+
+        $id_profesor = $this->id_profesor();
+        $curso = $this->request->getVar('inputEmail');
+        $tema = $this->request->getVar('inputEmail');
+
+
+        if($curso==null || $tema==null){
+            $datos['error']='Los campos no pueden estar vacíos';
+
+            //var_dump($datos['error']);die;
+            return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
+        }else{
+
+        }
+
+}
+
 
     public function buscar_alumno(){
         helper('cookie');

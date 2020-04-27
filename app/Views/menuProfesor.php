@@ -29,9 +29,10 @@
                               <li><a href="#tabs-1">Crear Curso</a></li>
                               <li><a href="#tabs-2">Buscar Alumno</a></li>
                               <li><a href="#tabs-3">Editar Curso</a></li>
+                              <li><a href="#tabs-4"><a href="<?php echo site_url('loginProfesor/registro'); ?>">Crear Alumno</a></a></li>
                             </ul>
                           <div id="tabs-1">
-                            <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/crearCurso'); ?>">
+                            <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/crear_curso'); ?>">
                             <h3 class="h3 mb-3 font-weight-normal">Introduce el nombre del curso :</h3>
                             <input type="text" class="form-control" name="inputInsertCurso" placeholder="Nombre del curso">
                             <h3 class="h3 mb-3 font-weight-normal">Introduce el nombre del tema :</h3>
@@ -55,36 +56,37 @@
                                 
                           </div>
                           <div id="tabs-3">
-                          <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/ver_curso'); ?>">
-                                <h3 class="h3 mb-3 font-weight-normal">Elige el curso a editar:</h3>
-                                      <div class="dropdown">
-                                        
-                                          <?php
-                                              if($cursos!=null){
-                                               echo'<select class="custom-select" name="id_curso">';
-                                                     // var_dump($cursos);die;
-                                                    foreach ($cursos as $nlinea => $valor) {
-                                                              //var_dump($valor->nombre);die;
-                                                      echo '<option class="dropdown-item" value="' .$valor->id_curso.'">'.$valor->nombre.'</option>';
-                                                    }
-                                               echo' </select>';
-                                              }else{
-                                                echo' <button class="btn btn-secondary dropdown-toggle disabled" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-disabled="true">
-                                                      No existen Cursos
-                                                      </button>';
+                              <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/ver_curso'); ?>">
+                                    <h3 class="h3 mb-3 font-weight-normal">Elige el curso a editar:</h3>
+                                          <div class="dropdown">
+                                            
+                                              <?php
+                                                  if($cursos!=null){
+                                                  echo'<select class="custom-select" name="id_curso">';
+                                                        // var_dump($cursos);die;
+                                                        foreach ($cursos as $nlinea => $valor) {
+                                                                  //var_dump($valor->nombre);die;
+                                                          echo '<option class="dropdown-item" value="' .$valor->id_curso.'">'.$valor->nombre.'</option>';
+                                                        }
+                                                  echo' </select>';
+                                                  }else{
+                                                    echo' <button class="btn btn-secondary dropdown-toggle disabled" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-disabled="true">
+                                                          No existen Cursos
+                                                          </button>';
 
-                                                     
-                                              }
-                                          ?>
-                                        </div>
+                                                        
+                                                  }
+                                              ?>
+                                            </div>
 
-                                  <p>  </p><button class="btn btn-lg btn-primary btn-block" type="submit" >Editar</button>
-                                  <p></p>
-                                  <p> <!---input type="submit" value="Crear"--></p>
-                                </form>
+                                      <p>  </p><button class="btn btn-lg btn-primary btn-block" type="submit" >Editar</button>
+                                      <p></p>
+                                      <p> <!---input type="submit" value="Crear"--></p>
+                                    </form>
 
                           
                           </div>
+
 
 
 
@@ -153,7 +155,7 @@
                     if($datosCurso!=null){
                             //var_dump($datosCurso[0]->nombreCurso);die;
                             
-                            echo '<h2>Curso de "'.$datosCurso[0]->nombreCurso.'" y </h2>
+                            echo '<h2>Curso de "'.$datosCurso[0]->nombreCurso.'" </h2>
                             
                             <table class="table table-striped .table-striped">
                                             <thead>
@@ -174,25 +176,25 @@
                                   <tbody>
                                   </tbody>
                                 </table>
-                                <form class="form" class="form " method="POST" action="'.site_url('menuProfesor/vista_editar_curso').'"> 
-                                <input id="id_curso" name="id_curso" type="hidden" value="';
-                                echo $id_curso;
-                                echo'">
+                                <form class="form" class="form " method="POST" action="'.site_url('menuProfesor/addTema').'">
+                                          
+                                <input id="prodId" name="inputCurso" type="hidden" value="'.$datosCurso[0]->id_curso.'">
+
+                                
                                 <h5 align="left"> Introduce el nombre del nuevo tema :</h5>
-                                    <input type="text" class="form-control" name="inputTemaNombre" placeholder="Nombre del tema">
+                                    <input type="text" class="form-control" name="inputInsertTema" placeholder="Nombre del tema">
                                 
                                 
                                 <button class="btn btn-lg btn-primary btn-block" type="submit" >imgMas Agrega Nuevo Tema</button>';
                                           
                     }else{
                       if($id_curso!=null){
-                              echo '<h2>Curso '.$id_curso;
-                              echo' <form class="form" class="form " method="POST" action="'.site_url('menuProfesor/vista_editar_curso').'"> 
-                              <input id="id_curso" name="id_curso" type="hidden" value="';
-                              echo $id_curso;
-                              echo'">
+                              echo '<h2>Curso '.$nombre_curso;
+                              echo' <form class="form" class="form " method="POST" action="'.site_url('menuProfesor/addTema').'"> 
+                              <input id="prodId" name="inputCurso" type="hidden" value="'.$id_curso.'">
+                             
                               <h5 align="left"> Introduce el nombre del nuevo tema :</h5>
-                                  <input type="text" class="form-control" name="inputTemaNombre" placeholder="Nombre del tema">
+                                  <input type="text" class="form-control" name="inputInsertTema" placeholder="Nombre del tema">
                               
                               
                               <button class="btn btn-lg btn-primary btn-block" type="submit" >imgMas Agrega Nuevo Tema</button>';

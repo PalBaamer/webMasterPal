@@ -18,7 +18,7 @@
 		$(document).ready(function(){
 			$('#txt-content').Editor();
 
-			$('#txt-content').Editor('setText', ['<p style="color:Black;">Hola</p>']);
+			$('#txt-content').Editor('setText', ['<p style="color:Black;">Escribe aquí el contenido del tema seleccionado</p>']);
 
 			$('#btn-enviar').click(function(){
 				$('#txt-content').text($('#txt-content').Editor('getText'));
@@ -29,15 +29,18 @@
 </head>
 <body>
 <a class="btn btn-primary" href="<?php echo site_url('menuProfesor/index'); ?>" role="button">Atrás</a>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8">
-				<form action="<?php echo site_url('menuProfesor/prueba?id_tema='.$id_tema.'');?>" method="post" id="frm-test">
+				<form action="<?php echo site_url('menuProfesor/insertarHTML'); ?>" method="post" id="frm-test">
+				
+				<input id="prodId" name="id_curso" type="hidden" value="<?php echo $id_curso; ?>">
+					<input id="prodId" name="temaNombre" type="hidden" value="<?php echo $temaNombre; ?>">
 					<div class="form-group">
-
 						<textarea id="txt-content" name="txt-content"></textarea>
 					</div>
-					<input type="submit" class="btn btn-default" id="btn-enviar" value="Mostrar Resultado">
+					<input type="submit" class="btn btn-default" id="btn-enviar" value="Guardar">
 				</form>
 			</div>
 		</div>

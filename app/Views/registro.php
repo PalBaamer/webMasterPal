@@ -10,7 +10,7 @@
 <div id="formAlta"  class="form d-flex p-2 justify-content-center" style="max-width: 50%;">
 
   <form id="" class="form " method='POST' action="<?php echo site_url('loginProfesor/registroUsuario'); ?>">
-<h2>Soy un :</h2>
+<h2>Categoria :</h2>
   <select class="custom-select" name="inputCategoria">
             
             <option class="dropdown-item" selected value="0" >Alumno</option>

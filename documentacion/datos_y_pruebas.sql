@@ -193,6 +193,17 @@ delete from tema where id_tema=27;
 delete from tema where id_tema=26;
 delete from tema where id_tema=25;
 delete from tema where id_tema=24;
+
+
+delete from tema where id_tema=1;
+
+
+
+
+
+
+
+
 insert into recurso ( id_tema,recurso)values(18,"<!doctype html>
 <html >  <head>
   <title>webMasterPal</title>

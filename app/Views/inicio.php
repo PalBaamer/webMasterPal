@@ -51,39 +51,6 @@
 									cubriéndose los tendidos altos con un tejado que descansa en arcos de medio punto sobre columnas de mármol.
 								</div>
 								<div>
-									El Palco del Príncipe finalizado en 1765, corresponde a la primera fase de su construcción.
-								</div>
-								
-								<div>
-									La fachada de estilo barroco está formada por un gran arco de medio punto flanqueado por columnas toscanas que dan paso a un entablamento sobre el que se sitúa un balcón rematado en frontón.
-								</div>
-								<div>
-									En 1786 se construyo el antiguo Palco o Balcón de la Diputación, luego denominado de Ganaderos, situado encima de la puerta de toriles.
-								</div>
-								<div>
-									En 1820 se termino de cubrir las gradas de la mitad de la plaza comprendida a la derecha e izquierda del Palco del Príncipe.
-								</div>
-								<div>
-									En 1868 fue restaurada debido a su mal estado y colocado el escudo de la Real Maestranza de Caballería.
-								</div>
-								<div>
-									Entre 1914 y 1915 Aníbal González realizó la reforma del Ruedoantiguo tendido pasando a doce las filas de sombra y catorce las de Sol, además de las tres filas de barrera.
-								</div>
-								<div>
-									Adosadas a la plaza se encuentran la Casa y la Capilla de la Real Maestranza de Caballería de Sevilla, ambos edificios los ejecutó Aníbal González en 1929.
-								</div>
-								<div>
-									La fachada exterior tiene detalles neoclásico y en su interior barroco, su estructura exterior tiene forma de polígono irregular debido a las numerosas construcciones a las que se ha visto afectada.
-								</div>
-								<div>
-									Se encuentra estructurada por tres anillos, el primero lo componen las localidades de barrera y tendido, el segundo la grada cubierta y galería interior de distribución y 
-									accesos a tendidos y servicios de la plaza, y el tercero escaleras de acceso a las localidades situadas en la grada cubierta.
-								</div>
-								<div>
-									El ruedo de la plaza de toros de Sevilla no es totalmente circular posee un eje de 63 metros y otro de 58 metros y su superficie está cubierta de albero. La barrera es de 1.40 metros 
-									de altura y en ella se sitúan seis burladeros. En el interior se sitúan los palcos del Príncipe, el palco de Presidencia de los festejos, palcos de convite, palco del Príncipe y el balcón del reloj.
-								</div>
-								<div>
 									Las puertas de acceso son catorce y entre las dependencias figuran, capilla, tres cuadras, dos corrales, veintiún chiqueros, enfermería y desolladero.
 								</div>
 							</div>

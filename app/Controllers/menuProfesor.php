@@ -142,6 +142,7 @@ public function crearCurso(){
             //var_dump($datos['error']);die;
             return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
         }else{
+            
 
         }
 
@@ -191,7 +192,7 @@ public function crearCurso(){
         $profesorM = new profesorModelo();
 
         $id_curso= $this->request->getVar('id_curso');
-
+        $nombre_curso = $profesorM->buscar_cursoID($id_curso);
         $datosCurso =  $profesorM->seleccion_1_curso( $id_profesor,$id_curso);
         
         if($datosCurso!=null){
@@ -199,6 +200,7 @@ public function crearCurso(){
             return view('cabecera').view('menuProfesor',$datos);
         }else{
             $datos['id_curso']= $id_curso;
+            $datos['nombre_curso']= $nombre_curso[0]->nombre;
             $datos['error']='El curso está vacío porfavor agregue contenido';
 
             //var_dump($datos['error']);die;
@@ -207,49 +209,87 @@ public function crearCurso(){
 
     }
 
-    public function vista_editar_curso(){
+
+    public function crear_curso(){
+
         $id_profesor=$this->id_profesor();
         $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
         $datos['cursos']=$this->buscar_curso($id_profesor);
         $datos['profesorDatos']=$this->recuperar_cookie();
         $profesorM = new profesorModelo();
 
-        $id_curso= $this->request->getVar('id_curso');
-        $temaNombre= $this->request->getVar('inputTemaNombre');
-        $datos['id_curso']=$id_curso;
-            //var_dump("id_curso ".$id_curso);die;
-
-        $temaInsertado =$profesorM->insert_tema($id_curso,$temaNombre);
-        //var_dump($temaInsertado);die;
-        $datos['id_tema']=$temaInsertado;
+        $nombreCurso= $this->request->getVar('inputInsertCurso');
+        $temaNombre= $this->request->getVar('inputInsertTema');
         
-        //var_dump($temaInsertado);die;
+        $existe_curso=$profesorM->buscar_curso($nombreCurso);
+     
+        if($existe_curso==null){
+            $id_Curso=$profesorM->insert_curso($nombreCurso,$id_profesor);
+            $datos['id_curso']=$id_Curso;
+            $datos['temaNombre']=$temaNombre;
+
+        
+            //var_dump($temaInsertado);die;
+            return view('editarCurso',$datos);
+
+        }else{
+            $datos['error']='El curso introducido ya está creado';
+
+            //var_dump($datos['error']);die;
+            return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
+        }
+
+
+
+    } public function addTema(){
+
+        $id_profesor=$this->id_profesor();
+        $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
+        $datos['cursos']=$this->buscar_curso($id_profesor);
+        $datos['profesorDatos']=$this->recuperar_cookie();
+        $profesorM = new profesorModelo();
+
+        $id_curso= $this->request->getVar('inputCurso');
+        $temaNombre= $this->request->getVar('inputInsertTema');
+        //var_dump($id_curso." y ".$temaNombre);die;
+        $datos['id_curso']=$id_curso;
+        $datos['temaNombre']=$temaNombre;
+        
         return view('editarCurso',$datos);
+
+
     }
 
-    public function pruebaHTML(){
+
+
+    public function insertarHTML(){
         $id_profesor=$this->id_profesor();
         $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
         $datos['cursos']=$this->buscar_curso($id_profesor);
         $datos['profesorDatos']=$this->recuperar_cookie();
         $profesorM = new profesorModelo();
         
-        $id_tema= $this->request->getVar('id_tema');
+        $id_curso= $this->request->getVar('id_curso');
+        $temaNombre=$this->request->getVar('temaNombre');
         $htmlTexto= $this->request->getVar('txt-content');
-      //  var_dump($htmlTexto." y ".$id_curso);die;
+      // var_dump($htmlTexto." el id del tema es : ".$id_curso." - nombre del tema :".$temaNombre);die;
         $datos['htmlTexto']=$htmlTexto;
 
        // var_dump($id_curso);die;
 
-        $insertHTML=$profesorM->insertar_recurso_html($id_tema,$htmlTexto);
+        $insertHTML=$profesorM->insertar_tema($id_curso,$temaNombre,$htmlTexto);
         //var_dump($insertHTML);die;
         if($insertHTML!=null){
-            $datos['error']='Se ha guardado correctamente el tema';
-
+            $datos['error']='El tema se ha guardado correctamente';
+            
             //var_dump($datos['error']);die;
             return view('cabecera').view('menuProfesor',$datos).view('pie');
         }else{
             $datos['error']='NO se ha guardado el tema';
+
+//---------------SI EL CURSO NO TIENE TEMAS, ENTONCES ESTE, SE BORRARÁ(HAZLO)
+
+            //$profesorM->borrar_tema($id_curso);
 
             //var_dump($datos['error']);die;
             return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
@@ -269,8 +309,61 @@ public function crearCurso(){
         return view('cabecera',$datos).view('prueba',$datos).view('pie');
     }
 
+    public function borrarTema(){
+        $id_profesor=$this->id_profesor();
+        $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
+        $datos['cursos']=$this->buscar_curso($id_profesor);
+        $datos['profesorDatos']=$this->recuperar_cookie();
+        $profesorM = new profesorModelo();
+        
+        $id_tema= $this->request->getVar('id_tema');
+
+        $temaBorrado= $profesorM->borrar_tema($id_tema);
+
+        if($temaBorrado!=null){
+            $datos['error']='El tema se ha borrado correctamente';
+            return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
+
+        }else{
+        $datos['error']='Ha ocurrido un error al borrar el tena, intentalo en unos minutos o contacta con el administrador del servicio.';
+
+            //var_dump($datos['error']);die;
+            return view('cabecera').view('menuProfesor',$datos).view('pie');
+        }
+    }
 
 
+
+    
+    public function vista_editar_curso(){
+        
+        $id_profesor=$this->id_profesor();
+        $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
+        $datos['cursos']=$this->buscar_curso($id_profesor);
+        $datos['profesorDatos']=$this->recuperar_cookie();
+        $profesorM = new profesorModelo();
+
+        $id_curso= $this->request->getVar('inputInsertCurso');
+        $temaNombre= $this->request->getVar('inputInsertTema');
+        $datos['id_curso']=$id_curso;
+            //var_dump("id_curso ".$id_curso);die;
+        
+        $temaInsertado =$profesorM->insert_tema($id_curso,$temaNombre);
+        
+        //var_dump($temaInsertado);die;
+        if($temaInsertado!=null){
+            $datos['id_tema']=$temaInsertado;
+        
+            //var_dump($temaInsertado);die;
+            return view('editarCurso',$datos);
+        }else{
+            
+            $datos['error']='Ha ocurrido un error al guardar el Curso, intentalo en unos minutos o contacta con el administrador del servicio.';
+
+            //var_dump($datos['error']);die;
+            return view('cabecera').view('menuProfesor',$datos).view('pie');
+        }
+    }
 
 
 }

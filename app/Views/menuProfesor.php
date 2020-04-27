@@ -155,7 +155,7 @@
                     if($datosCurso!=null){
                             //var_dump($datosCurso[0]->nombreCurso);die;
                             
-                            echo '<h2>Curso de "'.$datosCurso[0]->nombreCurso.'" </h2>
+                            echo '<h2>Curso de '.$datosCurso[0]->nombreCurso.'</h2>
                             
                             <table class="table table-striped .table-striped">
                                             <thead>
@@ -189,8 +189,8 @@
                                           
                     }else{
                       if($id_curso!=null){
-                              echo '<h2>Curso '.$nombre_curso;
-                              echo' <form class="form" class="form " method="POST" action="'.site_url('menuProfesor/addTema').'"> 
+                              echo '<h2>Curso '.$nombre_curso.'</h2>
+                               <form class="form" class="form " method="POST" action="'.site_url('menuProfesor/addTema').'"> 
                               <input id="prodId" name="inputCurso" type="hidden" value="'.$id_curso.'">
                              
                               <h5 align="left"> Introduce el nombre del nuevo tema :</h5>

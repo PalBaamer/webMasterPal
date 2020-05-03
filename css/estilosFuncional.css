@@ -1,10 +1,95 @@
 body {
-	padding-top: 5rem;
+	padding-top: 0;
+	margin-left: 5%;
+	margin-right: 5%;
   }
+
+
   h1{
     margin-top: 10%;
 
 }
+
+#cuerpo{
+	padding-top: 10%;
+		margin-top: 0;
+		margin-right: 50px;
+		margin-bottom: 50px;
+		margin-left: 1%;
+
+
+}
+
+#cajaAddTema{
+	text-align:left;
+	background-color:grey;
+	width: 30%;
+	padding: 2%;
+	margin:1%;
+}
+
+#cajaExamen{
+	text-align:left;
+	background-color:grey;
+	width: 30%;
+	padding: 2%;
+	margin:1%;
+  }
+
+
+.dropdown{
+	width: 20%;
+}
+
+#dropDowntemas{
+	width: 50%;
+
+}
+
+
+.cbox1{
+	width: 50%;
+}
+
+input[type=checkbox]
+{
+  /* Doble-tamaño Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari y Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding-left: 50%;
+}
+
+
+
+/*------------------------------PAGINA CREAR PREGUNTA EXAMEN------------------------------------*/
+#preguntas{
+	margin-top: 1%;
+	padding-bottom: 2%;
+	background-color:grey;
+	
+}
+.labelPreguntas{
+	
+	margin-left: 0.5%;
+  }
+
+  .inputPreguntas{
+	width: 50%;
+	margin-left: 1%;
+  }
+
+
+  /*------------------------------FIN------------------------------------*/
+
+
+/*@media (min-width: 1200px)
+#cuerpo {
+    max-width: 1060px;
+}*/
+
+
 #tablaPideCita{
 	margin-top: 10%;
 }
@@ -56,9 +141,13 @@ body {
    border: #E0E0E0 solid 1px; 
    height: 33%; 
   background-color:#EEEEEE;}
+  
   .loginCampo{
 	margin-top: 15%;
   }
+
+
+  
 /*-------------------------------LOGIN-----------------------------------
 		
 		

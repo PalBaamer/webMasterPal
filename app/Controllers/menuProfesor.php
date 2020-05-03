@@ -109,6 +109,7 @@ class menuProfesor extends BaseController{
 						
                 $datos['profesorDatos']=$profesor;
                 $datos['cursos']=$this->buscar_cursos_y_alumnos($profesor->id_profesor);
+                $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($profesor->id_profesor);
 				//var_dump($profesor);die;
 					return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
 				
@@ -220,24 +221,32 @@ public function crearCurso(){
 
         $nombreCurso= $this->request->getVar('inputInsertCurso');
         $temaNombre= $this->request->getVar('inputInsertTema');
-        
-        $existe_curso=$profesorM->buscar_curso($nombreCurso);
+        if($nombreCurso!=null || $temaNombre!=null){
+            $existe_curso=$profesorM->buscar_curso($nombreCurso);
      
-        if($existe_curso==null){
-            $id_Curso=$profesorM->insert_curso($nombreCurso,$id_profesor);
-            $datos['id_curso']=$id_Curso;
-            $datos['temaNombre']=$temaNombre;
-
-        
-            //var_dump($temaInsertado);die;
-            return view('editarCurso',$datos);
-
+            if($existe_curso==null){
+                $id_Curso=$profesorM->insert_curso($nombreCurso,$id_profesor);
+                $datos['id_curso']=$id_Curso;
+                $datos['temaNombre']=$temaNombre;
+    
+            
+                //var_dump($temaInsertado);die;
+                return view('editarCurso',$datos);
+    
+            }else{
+                $datos['error']='El curso introducido ya está creado';
+    
+                //var_dump($datos['error']);die;
+                return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
+            }
         }else{
-            $datos['error']='El curso introducido ya está creado';
+            $datos['error']='Han de estar cumplimentados ambos datos';
+    
+                //var_dump($datos['error']);die;
+                return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
 
-            //var_dump($datos['error']);die;
-            return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
         }
+       
 
 
 
@@ -297,7 +306,7 @@ public function crearCurso(){
         }
     }
 
-    public function verTema(){
+    public function ver_tema(){
         $id_profesor=$this->id_profesor();
         $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
         $datos['cursos']=$this->buscar_curso($id_profesor);
@@ -305,8 +314,45 @@ public function crearCurso(){
         $profesorM = new profesorModelo();
         
         $id_tema= $this->request->getVar('id_tema');
+       
+        $cuerpoTema =$profesorM->ver_tema($id_tema);
+        //var_dump($cuerpoTema);die;
+        if($cuerpoTema!=null){
+            //var_dump("ENTRA");die;
+            $datos['tema']=$cuerpoTema[0];
+            return view('cabecera',$datos).view('prueba',$datos).view('pie');
+
+            
+        }else{
+            $datos['error']='No se ha encontrado el tema ';
+            return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
+
+        }
         
-        return view('cabecera',$datos).view('prueba',$datos).view('pie');
+    }
+
+    public function editar_tema(){
+        $id_profesor=$this->id_profesor();
+        $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
+        $datos['cursos']=$this->buscar_curso($id_profesor);
+        $datos['profesorDatos']=$this->recuperar_cookie();
+        $profesorM = new profesorModelo();
+        
+        $id_tema= $this->request->getVar('id_tema');
+
+        $cuerpoTema =$profesorM->ver_tema($id_tema);
+
+        if($cuerpoTema!=null){
+            $datos['tema']=$cuerpoTema;
+            return view('cabecera',$datos).view('editarCurso',$datos).view('pie');
+
+            
+        }else{
+            $datos['error']='No se ha encontrado el tema ';
+            return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
+
+        }
+        
     }
 
     public function borrarTema(){
@@ -349,7 +395,8 @@ public function crearCurso(){
             //var_dump("id_curso ".$id_curso);die;
         
         $temaInsertado =$profesorM->insert_tema($id_curso,$temaNombre);
-        
+        $ejemplo="Inserta aquí tu tema";
+        $datos['tema']=$ejemplo;
         //var_dump($temaInsertado);die;
         if($temaInsertado!=null){
             $datos['id_tema']=$temaInsertado;
@@ -364,6 +411,98 @@ public function crearCurso(){
             return view('cabecera').view('menuProfesor',$datos).view('pie');
         }
     }
+
+    public function crear_examen(){
+        $id_profesor=$this->id_profesor();
+        $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
+        $datos['cursos']=$this->buscar_curso($id_profesor);
+        $datos['profesorDatos']=$this->recuperar_cookie();
+        $profesorM = new profesorModelo();
+
+        $id_tema = $this->request->getVar('id_tema');
+        $hora = $this->request->getVar('tiempo_hora');
+        $minutos = $this->request->getVar('tiempo_minutos');
+        $sinTiempo = $this->request->getVar('noTiempo');
+        $nota = $this->request->getVar('nota');
+
+        if($sinTiempo!="si"){
+            $tiempo =$hora.":".$minutos.":00";
+        }else{
+            $tiempo ="00:00:00";
+        }
+        //var_dump($tiempo);die;
+        $id_examen = $profesorM ->insertar_examen($id_tema,$tiempo,$nota);
+ 
+        if($id_examen!=null){
+            $datos['id_examen']=$id_examen;
+            return view('cabecera').view('crearPreguntasExamen',$datos).view('pie');
+
+        }else{
+
+            $datos['error']='Ha ocurrido un error al guardar el examen, intentalo en unos minutos o contacta con el administrador del servicio.';
+
+            //var_dump($datos['error']);die;
+            return view('cabecera').view('menuProfesor',$datos).view('pie');
+
+        }
+    }
+
+        public function crear_preguntas(){
+        $id_profesor=$this->id_profesor();
+        $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
+        $datos['cursos']=$this->buscar_curso($id_profesor);
+        $datos['profesorDatos']=$this->recuperar_cookie();
+        $profesorM = new profesorModelo();
+
+        $id_examen = $this->request->getVar('id_examen');
+        $pregunta = $this->request->getVar('pregunta');
+        $respuestaCorrecta = $this->request->getVar('respuestaCorrecta');
+        $respuestaA = $this->request->getVar('respuestaA');
+        $respuestaB = $this->request->getVar('respuestaB');
+        $respuestaC = $this->request->getVar('respuestaC');
+        $nota = $this->request->getVar('nota');
+
+
+        $addMore=$this->request->getVar('addMore');
+        
+            //var_dump(isset($addMore));die;
+          //  var_dump($id_examen." -- ".$pregunta."--". $respuestaCorrecta."--". $respuestaA."--".$respuestaB."--".$respuestaB."--". $nota);die;
+        $id_preguntas = $profesorM->crear_preguntas($id_examen, $pregunta,$respuestaCorrecta,$respuestaA,$respuestaB,$respuestaC,$nota);
+        //var_dump($id_preguntas);die;
+        if($id_preguntas==0){
+            
+            if( empty($addMore)==false){
+                //var_dump("ENTRA addMore");die;
+                $datos['error']='La pregunta ha sido guardada correctamente';
+                $datos['id_examen']=$id_examen;
+                //var_dump($datos['error']);die;
+                return view('cabecera').view('crearPreguntasExamen',$datos).view('pie');
+
+            }else{
+               // var_dump("ENTRA save");die;
+                $datos['error']='La pregunta ha sido guardada correctamente';
+                return view('cabecera').view('menuProfesor',$datos).view('pie');
+            }
+            
+        }else{
+            var_dump("Ha habido un error");die;
+            $datos['error']='Ha ocurrido un error al guardar la pregunta, intentalo en unos minutos o contacta con el administrador del servicio.';
+
+            //var_dump($datos['error']);die;
+            return view('cabecera').view('menuProfesor',$datos).view('pie');
+
+        }
+
+            
+        }
+
+
+
+
+
+
+
+    
 
 
 }

@@ -35,10 +35,12 @@
 			<div class="col-sm-8">
 				<form action="<?php echo site_url('menuProfesor/insertarHTML'); ?>" method="post" id="frm-test">
 				
-				<input id="prodId" name="id_curso" type="hidden" value="<?php echo $id_curso; ?>">
+					<input id="prodId" name="id_curso" type="hidden" value="<?php echo $id_curso; ?>">
 					<input id="prodId" name="temaNombre" type="hidden" value="<?php echo $temaNombre; ?>">
 					<div class="form-group">
-						<textarea id="txt-content" name="txt-content"></textarea>
+						<textarea id="txt-content" name="txt-content">
+							<?php echo $tema->cuerpo_tema?>
+						</textarea>
 					</div>
 					<input type="submit" class="btn btn-default" id="btn-enviar" value="Guardar">
 				</form>
@@ -59,14 +61,4 @@
         
 
 
-		<div class="row">
-			<div class="col-sm-8">
-				<div id="texto" style="border:1px solid #000; padding:10px;margin-top:20px;">
-					
-				</div>
-			</div>
-        </div>
-        
-
-
-    </div>
+		

@@ -172,8 +172,41 @@ protected $table = "profesor";
          //var_dump("LLEGA");die;
         // var_dump("DELETE from tema where id_tema=".$id_tema."");die;
          $query = $db->query("DELETE from tema where id_tema=".$id_tema."");
-         //var_dump($queryInsert);die;
-         return $query;
+         $results = $query->getResult();
+         return $results;
+      }
+
+      function ver_tema($id_tema){
+         $db=\Config\Database::connect();
+         //var_dump("LLEGA");die;
+        //var_dump("SELECT cuerpo_tema from tema where id_tema=".$id_tema."");die;
+         $query = $db->query("SELECT cuerpo_tema from tema where id_tema=$id_tema");
+        
+         $results = $query->getResult();
+         //var_dump($results);die;
+         return $results;
+      }
+
+      function insertar_examen($id_tema , $tiempo, $nota){
+         $db=\Config\Database::connect();
+         //var_dump($id_tema. " y ".$recurso );die;
+        //var_dump("INSERT into examen (id_tema, puntos_para_aprobar,tiempo_examen)values(".$id_tema.",".$nota.",'".$tiempo."')");die;
+         //var_dump($id_curso.' - '.$nombreTema.' - '.$htmlTexto);die;
+         $queryInsert = $db->query(" INSERT into examen (id_tema, puntos_para_aprobar,tiempo_examen)values(".$id_tema.",".$nota.",'".$tiempo."')");
+         $id_tema=$db->insertID();
+         return $id_tema;
+        
+      }
+
+      public function crear_preguntas($id_examen, $pregunta,$respuestaCorrecta,$respuestaA,$respuestaB,$respuestaC,$nota){
+         $db=\Config\Database::connect();
+        //("INSERT into preguntas values(".$id_examen.",'".$pregunta."','".$respuestaA."','".$respuestaB."','".$respuestaC."','".$respuestaCorrecta."',".$nota.")");die;
+         $queryInsert = $db->query(" INSERT into preguntas values(".$id_examen.",'".$pregunta."','".$respuestaA."','".$respuestaB."','".$respuestaC."','".$respuestaCorrecta."',".$nota.")");
+         $results = $db->insertID();
+        // var_dump($results );die;
+         return $results;
+
+
       }
 
 }

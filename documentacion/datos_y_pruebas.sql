@@ -178,6 +178,7 @@ ALTER TABLE recurso ADD constraint recurso_pertenece_tema FOREIGN KEY (id_tema) 
 alter table recurso modify column recurso recurosHTML longtext;
 alter table recurso MODIFY recurso LONGTEXT;
 ALTER COLUMN id_leccion id_tema LONGTEXT;
+
 delete from tema where id_tema=41;
 delete from tema where id_tema=42;
 delete from tema where id_tema=43;
@@ -194,10 +195,87 @@ delete from tema where id_tema=26;
 delete from tema where id_tema=25;
 delete from tema where id_tema=24;
 
+delete from curso where id_curso=6;
 
-delete from tema where id_tema=1;
+
+//BUSCAR FK_BORRARLA Y BORRAR EL CAMPO
+select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE TABLE_NAME='examen';
+alter table examen drop foreign key alumno_hace_examen;
+alter table examen drop id_alumno;
+
+alter table examen.nota modify column puntos_para_aprobar;
+
+alter table examen add puntos_para_aprobar int(3);
+
+ALTER TABLE examen add id_preguntas int(3) after id_tema;
+
+alter table examen add tiempo_examen time;
 
 
+select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE TABLE_NAME='preguntas';
+alter table preguntas drop foreign key pregunta_pertenece_examen;
+alter table preguntas drop id_examen;
+alter table preguntas add respuestaA varchar(400) after pregunta;
+alter table preguntas add respuestaB varchar(400) after respuestaA;
+alter table preguntas add respuestaC varchar(400) after respuestaB;
+
+alter table preguntas drop primary key ;
+alter table preguntas drop primary key PRIMARY;
+alter table preguntas drop foreign key primary;
+alter table preguntas drop primary key primary;
+alter table preguntas drop constraint PRIMARY;
+
+drop table preguntas;
+
+CREATE TABLE preguntas(
+id_examen int (2)not null,
+pregunta varchar(400),
+respuestaA varchar(400),
+respuestaB varchar(400),
+respuestaC varchar(400),
+respuesta_correcta varchar(400),
+puntuacion int(3);
+
+constraint respuesta_del_examen foreign key (id_examen) references examen(id_examen)
+);
+
+
+insert into examen (id_tema, puntos_para_aprobar,tiempo_examen)
+values($id_tema,$nota,$tiempo);
+
+delete from examen where id_examen=1;
+
+
+select distinct examen.id_examen, tema.id_tema from tema, examen where examen.id_tema=tema.id_tema order by examen.id_examen;
+
+delete from examen where id_examen=37;
+delete from examen where id_examen=38;
+delete from examen where id_examen=39;
+delete from examen where id_examen=40;
+delete from examen where id_examen=41;
+delete from examen where id_examen=42;
+delete from examen where id_examen=43;
+delete from examen where id_examen=44;
+delete from examen where id_examen=45;
+delete from examen where id_examen=46;
+delete from examen where id_examen=26;
+delete from examen where id_examen=27;
+delete from examen where id_examen=28;
+delete from examen where id_examen=29;
+delete from examen where id_examen=30;
+delete from examen where id_examen=31;
+delete from examen where id_examen=32;
+delete from examen where id_examen=33;
+delete from examen where id_examen=34;
+delete from examen where id_examen=35;
+delete from examen where id_examen=36;
+
+alter table tema add id_examen int(3) default null;
+
+ALTER TABLE tema ADD constraint recurso_pertenece_tema FOREIGN KEY (id_tema) REFERENCES tema(id_tema);
+alter table tema add constraint tema_tiene_examen foreign key (id_examen) references examen(id_examen);
+
+alter table tema drop id_examen;
 
 
 

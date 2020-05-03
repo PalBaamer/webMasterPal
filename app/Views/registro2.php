@@ -1,13 +1,9 @@
 
-
-
-  <br>
-<br>
-<br>
 <div id="formAlta"  class="form d-flex p-2 justify-content-center" style="max-width: 50%;">
 
   <form id="" class="form " method='POST' action="<?php echo site_url('loginProfesor/registroUsuario'); ?>">
-<h1 class="h3 mb-3 font-weight-normal">Inserte sus datos <p> Soy un :             
+  <input id="prodId" name="id_curso" type="hidden" value="<?php echo $id_curso; ?>">
+<h1 class="h3 mb-3 font-weight-normal">Inserte sus datos</h1>
 <select class="custom-select" name="inputCategoria">
             
             <option class="dropdown-item" selected value="0" >Alumno</option>
@@ -15,7 +11,6 @@
             <!--option class="dropdown-item" value="0" >NO</option-->          
         
     </select>
-    </p> 
     </h1>
       
       <label for="inputNombre" class="sr-only">NOMBRE</label>

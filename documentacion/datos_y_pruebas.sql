@@ -343,7 +343,7 @@ select distinct curso.id_curso,curso.nombre, tema.id_tema,tema.nombre from alumn
 where alumno_accede_curso.id_alumno=6 and curso.id_curso=tema.id_curso and cuerpo_tema is not null order by curso.id_curso;
 
 select distinct curso.id_curso,curso.nombre from alumno_accede_curso,curso,tema 
-where alumno_accede_curso.id_alumno=6 and curso.id_curso=tema.id_curso and cuerpo_tema is not null order by curso.id_curso;
+where alumno_accede_curso.id_alumno=6 and curso.id_curso=tema.id_curso and cuerpo_tema is not null order by curso.nombre;
 
 SELECT c.nombre as nombre FROM alumno_accede_curso aac join curso c on(aac.id_curso=c.id_curso) where aac.id_alumno=6 order by nombre;
 

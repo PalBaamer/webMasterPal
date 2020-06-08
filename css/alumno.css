@@ -1,0 +1,151 @@
+/*--------------------ALUMNO------------*/
+* {
+	box-sizing: border-box;
+  }
+  
+  /* Style the body */
+  body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+  }
+  /*--------------------CABECERA------------*/
+
+  header {
+	padding: 10px;
+	background: #1abc9c;
+	color: white;
+  }
+  
+  /* Increase the font size of the heading */
+  header label {
+	font-size: 40px;
+	text-align: center;
+  }
+
+  header a.inicioImg{
+	margin: 0;
+  }
+
+  header a.apagar{
+	float: right;
+  }
+
+   /*--------------------BARRA DE NAVEGACIÓN------------*/
+   nav {
+	overflow: hidden;
+	background-color: #333;
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0;
+  }
+  
+  /* Estilos de la barra */
+  nav a {
+	float: left;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 20px;
+	text-decoration: none;
+  }
+
+  nav a:hover {
+	background-color: #ddd;
+	color: black;
+  }
+  
+  nav a.active {
+	background-color: #666;
+	color: white;
+  }
+
+  .grid-container {
+	display: grid;
+	grid-gap: 30px 10px;
+	grid-template-columns: auto auto auto;
+	padding: 10px;
+  }
+  
+  .grid-item {
+	padding: 10px;
+	font-size: 30px;
+	text-align: center;
+  }
+  /*--------------------BOTON------------*/
+  
+  .boton {
+	background-color: #FA8072;
+	border: none;
+	color: black;
+	padding: 2% 2%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px;
+	transition-duration: 0.4s;
+	border-radius: 12px;
+  }
+
+  .boton {
+	  
+	background-color: #FA8072;
+	color: white;
+	border: 2px solid #FFA07A;
+  }
+  
+  .boton:hover {
+	
+	background-color: white; 
+	color: black; 
+	border: 2px solid #FFA07A;
+  }
+  
+
+
+  /*--------------------ALERTAS------------*/
+  .warning{
+	position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+  }
+  .alerta{
+	color: #856404;
+    background-color: #fff3cd;
+	border-color: #ffeeba;
+	width: 60%;
+	margin-left:2% ;
+	font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+.fieldset{
+	padding: 0%;
+	margin:0%;
+  }
+
+ /*--------------------BARRA PROGRESO------------*/
+  #progreso {
+	width: 100%;
+	background-color: #ddd;
+  }
+  
+
+  
+.barra {
+	text-align: right; /* Right-align text */
+	padding-top: 10px; /* Add top padding */
+	padding-bottom: 10px; /* Add bottom padding */
+	color: white; /* White text color */
+	width: 90%; 
+	background-color:  #F4D03F;
+  }
+  
+
+  
+ 
+  
+  

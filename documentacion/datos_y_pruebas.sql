@@ -272,15 +272,16 @@ delete from examen where id_examen=36;
 
 alter table tema add id_examen int(3) default null;
 
-ALTER TABLE tema ADD constraint recurso_pertenece_tema FOREIGN KEY (id_tema) REFERENCES tema(id_tema);
 alter table tema add constraint tema_tiene_examen foreign key (id_examen) references examen(id_examen);
 
 alter table tema drop id_examen;
 
 
 
+select id_tema from tema,curso where examen.id_curso=tema.id_curso,id_examen is not null;
+select id_tema from tema where id_curso=12 and id_examen is not null;
 
-
+alter table examen add total_examen int(3);
 
 insert into recurso ( id_tema,recurso)values(18,"<!doctype html>
 <html >  <head>
@@ -318,27 +319,33 @@ insert into recurso (id_tema,recurso)values(12,"<!doctype html>
 
 
 
+!----------------SELECCIONA LOS EXAMENES DEL TEMA 12 CUYO ID_TEMA SEA IGUAL AL ID_TEMA DEL EXAMEN------------------------------------
+
+select tema.id_tema, tema.nombre, examen.id_examen from tema, examen where examen.id_tema=tema.id_tema and tema.id_curso=12;
+alter table tema drop foreign key tema_tiene_examen;
+
+select distinct tema.id_tema, tema.nombre from tema, examen where examen.id_tema=tema.id_tema and tema.id_curso=12;
+
+select t.id_tema, t.nombre, e.id_examen from tema t left join examen e on(e.id_tema=t.id_tema) where t.id_curso=12;
+
+alter table preguntas.respuesta_correcta modify column respuestaD;
+alter table examen.nota modify column puntos_para_aprobar;
+ALTER TABLE preguntas CHANGE COLUMN respuesta_correcta respuestaD varchar(400);
+
+alter table curso add pswd int(6);
+update curso set pswd=1234;
+
+delete from alumno where id_alumno=7;
+SELECT * FROM alumno_accede_curso aac right join curso c on(aac.id_curso=c.id_curso) curso c join tema t on(c_curso=t.id_curso) where aac.id_alumno=6;
 
 
+select distinct curso.id_curso,curso.nombre, tema.id_tema,tema.nombre from alumno_accede_curso,curso,tema 
+where alumno_accede_curso.id_alumno=6 and curso.id_curso=tema.id_curso and cuerpo_tema is not null order by curso.id_curso;
 
+select distinct curso.id_curso,curso.nombre from alumno_accede_curso,curso,tema 
+where alumno_accede_curso.id_alumno=6 and curso.id_curso=tema.id_curso and cuerpo_tema is not null order by curso.id_curso;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT c.nombre as nombre FROM alumno_accede_curso aac join curso c on(aac.id_curso=c.id_curso) where aac.id_alumno=6 order by nombre;
 
 
 

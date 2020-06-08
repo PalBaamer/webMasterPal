@@ -87,12 +87,13 @@ protected $table = "profesor";
 
 
 
- //-------SELECCIONA 1 CURSO Y TODOS LOS TEMAS QUE CONTIENE SI ESTÁ VACÏO AUNUE EL CURSO EXISTA DEVUELVE NULL
+ //-------SELECCIONA 1 CURSO Y TODOS LOS TEMAS QUE CONTIENE SI ESTÁ VACIO EL CURSO DEVUELVE NULL
       function seleccion_1_curso($id_profesor,$id_curso){
          $db=\Config\Database::connect();
+         $query = $db->query('SELECT c.id_curso,c.nombre as nombreCurso ,t.id_tema, t.nombre as nombreTema from curso c join tema t using (id_curso) where c.id_profesor='.$id_profesor.' and c.id_curso='.$id_curso) ;
          
-         $query = $db->query('SELECT c.id_curso,c.nombre as nombreCurso ,t.id_tema,t.nombre as nombreTema from curso c join tema t using (id_curso) where c.id_profesor='.$id_profesor.' and c.id_curso='.$id_curso) ;
          $results = $query->getResult();
+       
          return $results;
       }
 
@@ -113,14 +114,16 @@ protected $table = "profesor";
 
        //-------BUSCA SI EL ID DEL CURSO YA EXISTE
        function buscar_cursoID($id_curso){
+
          $db=\Config\Database::connect();
-         $queryInsert = $db->query('SELECT nombre from curso where id_curso ='.$id_curso.'');
-         $results = $queryInsert->getResult();
+         $query = $db->query('SELECT nombre from curso where id_curso ='.$id_curso.'');
+         $results = $query->getResult();
+         
          if($results==null || isset($results)==false){
             return null;
          }else{
 
-            return $results;
+            return $results=$results[0]->nombre;
          }
 
       }
@@ -169,9 +172,10 @@ protected $table = "profesor";
 
       function borrar_tema($id_tema){
          $db=\Config\Database::connect();
-         //var_dump("LLEGA");die;
-        // var_dump("DELETE from tema where id_tema=".$id_tema."");die;
+         //var_dump("en el modelo es id_tema es :".$id_tema);die;
+         $query = $db->query("DELETE from examen where id_tema=".$id_tema."");
          $query = $db->query("DELETE from tema where id_tema=".$id_tema."");
+         
          $results = $query->getResult();
          return $results;
       }
@@ -187,23 +191,67 @@ protected $table = "profesor";
          return $results;
       }
 
-      function insertar_examen($id_tema , $tiempo, $nota){
+      function insertar_examen($id_tema , $tiempo, $notaMinima,$notaMaxima){
          $db=\Config\Database::connect();
          //var_dump($id_tema. " y ".$recurso );die;
         //var_dump("INSERT into examen (id_tema, puntos_para_aprobar,tiempo_examen)values(".$id_tema.",".$nota.",'".$tiempo."')");die;
          //var_dump($id_curso.' - '.$nombreTema.' - '.$htmlTexto);die;
-         $queryInsert = $db->query(" INSERT into examen (id_tema, puntos_para_aprobar,tiempo_examen)values(".$id_tema.",".$nota.",'".$tiempo."')");
+         $queryInsert = $db->query(" INSERT into examen (id_tema, puntos_para_aprobar,tiempo_examen,total_examen)values($id_tema,$notaMinima,'".$tiempo."',$notaMaxima)");
          $id_tema=$db->insertID();
          return $id_tema;
         
       }
 
-      public function crear_preguntas($id_examen, $pregunta,$respuestaCorrecta,$respuestaA,$respuestaB,$respuestaC,$nota){
+      public function crear_pregunta($id_examen, $pregunta,$respuestaA,$respuestaB,$respuestaC,$respuestaD,$nota){
          $db=\Config\Database::connect();
         //("INSERT into preguntas values(".$id_examen.",'".$pregunta."','".$respuestaA."','".$respuestaB."','".$respuestaC."','".$respuestaCorrecta."',".$nota.")");die;
-         $queryInsert = $db->query(" INSERT into preguntas values(".$id_examen.",'".$pregunta."','".$respuestaA."','".$respuestaB."','".$respuestaC."','".$respuestaCorrecta."',".$nota.")");
+         $queryInsert = $db->query(" INSERT into preguntas values(".$id_examen.",'".$pregunta."','".$respuestaA."','".$respuestaB."','".$respuestaC."','".$respuestaD."',".$nota.")");
          $results = $db->insertID();
         // var_dump($results );die;
+         return $results;
+
+
+      }
+
+      public function obtener_temas_examen($id_curso){
+         $db=\Config\Database::connect();
+        // var_dump("select tema.id_tema, tema.nombre, examen.id_examen from tema, examen where examen.id_tema=tema.id_tema and tema.id_curso=".$id_curso.";");die;
+         $query = $db->query("SELECT t.id_tema, t.nombre, e.id_examen from tema t left join examen e on(e.id_tema=t.id_tema) where t.id_curso=".$id_curso."");
+
+         $results = $query->getResult();
+        //var_dump($results);die;
+         return $results;
+
+      }
+
+      public function preguntas_tema($id_examen){
+         $db=\Config\Database::connect();
+         // var_dump("select tema.id_tema, tema.nombre, examen.id_examen from tema, examen where examen.id_tema=tema.id_tema and tema.id_curso=".$id_curso.";");die;
+          $query = $db->query("SELECT * from preguntas where id_examen=".$id_examen." order by rand()");
+          
+          $results = $query->getResult();
+         //var_dump($results);die;
+          return $results;
+
+      }
+      public function examen($id_examen){
+         $db=\Config\Database::connect();
+         // var_dump("select tema.id_tema, tema.nombre, examen.id_examen from tema, examen where examen.id_tema=tema.id_tema and tema.id_curso=".$id_curso.";");die;
+          $query = $db->query("SELECT * from examen where id_examen=".$id_examen."");
+ 
+          $results = $query->getResult();
+         //var_dump($results);die;
+          return $results;
+
+      }
+
+      public function examen_borrar($id_examen){
+         $db=\Config\Database::connect();
+         //var_dump("en el modelo es id_tema es :".$id_tema);die;
+         $query = $db->query("DELETE from preguntas where id_examen=".$id_examen."");
+         $query = $db->query("DELETE from examen where id_examen=".$id_examen."");
+         
+         $results = $query->getResult();
          return $results;
 
 

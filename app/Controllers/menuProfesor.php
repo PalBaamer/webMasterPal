@@ -194,10 +194,13 @@ public function crearCurso(){
 
         $id_curso= $this->request->getVar('id_curso');
         $nombre_curso = $profesorM->buscar_cursoID($id_curso);
-        $datosCurso =  $profesorM->seleccion_1_curso( $id_profesor,$id_curso);
+
+        $temas =$profesorM->obtener_temas_examen($id_curso);
         
-        if($datosCurso!=null){
-            $datos['datosCurso']=$datosCurso;
+        if($temas!=null){
+            $datos['nombre_curso']= $nombre_curso;
+            $datos['id_curso']= $id_curso;
+            $datos['datosCurso']=$temas;
             return view('cabecera').view('menuProfesor',$datos);
         }else{
             $datos['id_curso']= $id_curso;
@@ -260,10 +263,10 @@ public function crearCurso(){
 
         $id_curso= $this->request->getVar('inputCurso');
         $temaNombre= $this->request->getVar('inputInsertTema');
-        //var_dump($id_curso." y ".$temaNombre);die;
         $datos['id_curso']=$id_curso;
         $datos['temaNombre']=$temaNombre;
         
+       // var_dump($id_curso." y ".$temaNombre);die;
         return view('editarCurso',$datos);
 
 
@@ -282,9 +285,9 @@ public function crearCurso(){
         $temaNombre=$this->request->getVar('temaNombre');
         $htmlTexto= $this->request->getVar('txt-content');
       // var_dump($htmlTexto." el id del tema es : ".$id_curso." - nombre del tema :".$temaNombre);die;
-        $datos['htmlTexto']=$htmlTexto;
+        //$datos['htmlTexto']=$htmlTexto;
 
-       // var_dump($id_curso);die;
+       //var_dump(" El id del curso es :".$id_curso." - ".$temaNombre." y ".$htmlTexto);die;
 
         $insertHTML=$profesorM->insertar_tema($id_curso,$temaNombre,$htmlTexto);
         //var_dump($insertHTML);die;
@@ -365,7 +368,6 @@ public function crearCurso(){
         $id_tema= $this->request->getVar('id_tema');
 
         $temaBorrado= $profesorM->borrar_tema($id_tema);
-
         if($temaBorrado!=null){
             $datos['error']='El tema se ha borrado correctamente';
             return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
@@ -423,7 +425,10 @@ public function crearCurso(){
         $hora = $this->request->getVar('tiempo_hora');
         $minutos = $this->request->getVar('tiempo_minutos');
         $sinTiempo = $this->request->getVar('noTiempo');
-        $nota = $this->request->getVar('nota');
+        $notaMinima = $this->request->getVar('notaMinima');
+        $notaMaxima = $this->request->getVar('notaMaxima');
+        $nPreguntas = $this->request->getVar('nPreguntas');
+        
 
         if($sinTiempo!="si"){
             $tiempo =$hora.":".$minutos.":00";
@@ -431,10 +436,13 @@ public function crearCurso(){
             $tiempo ="00:00:00";
         }
         //var_dump($tiempo);die;
-        $id_examen = $profesorM ->insertar_examen($id_tema,$tiempo,$nota);
+        $id_examen = $profesorM ->insertar_examen($id_tema,$tiempo,$notaMinima,$notaMaxima);
  
         if($id_examen!=null){
             $datos['id_examen']=$id_examen;
+            $datos['notaMaxima']=$notaMaxima;
+            $datos['notaMinima']=$notaMinima;
+            $datos['nPreguntas']=$nPreguntas;
             return view('cabecera').view('crearPreguntasExamen',$datos).view('pie');
 
         }else{
@@ -447,53 +455,103 @@ public function crearCurso(){
         }
     }
 
-        public function crear_preguntas(){
+
+
+        public function guardar_preguntas(){
         $id_profesor=$this->id_profesor();
         $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
         $datos['cursos']=$this->buscar_curso($id_profesor);
         $datos['profesorDatos']=$this->recuperar_cookie();
         $profesorM = new profesorModelo();
-
         $id_examen = $this->request->getVar('id_examen');
-        $pregunta = $this->request->getVar('pregunta');
-        $respuestaCorrecta = $this->request->getVar('respuestaCorrecta');
-        $respuestaA = $this->request->getVar('respuestaA');
-        $respuestaB = $this->request->getVar('respuestaB');
-        $respuestaC = $this->request->getVar('respuestaC');
-        $nota = $this->request->getVar('nota');
-
-
-        $addMore=$this->request->getVar('addMore');
+        $n_preguntas = $this->request->getVar('n_preguntas');
+       
+            for ($i=0; $i <$n_preguntas ; $i++) { 
         
-            //var_dump(isset($addMore));die;
-          //  var_dump($id_examen." -- ".$pregunta."--". $respuestaCorrecta."--". $respuestaA."--".$respuestaB."--".$respuestaB."--". $nota);die;
-        $id_preguntas = $profesorM->crear_preguntas($id_examen, $pregunta,$respuestaCorrecta,$respuestaA,$respuestaB,$respuestaC,$nota);
-        //var_dump($id_preguntas);die;
-        if($id_preguntas==0){
-            
-            if( empty($addMore)==false){
-                //var_dump("ENTRA addMore");die;
-                $datos['error']='La pregunta ha sido guardada correctamente';
-                $datos['id_examen']=$id_examen;
-                //var_dump($datos['error']);die;
-                return view('cabecera').view('crearPreguntasExamen',$datos).view('pie');
+                $pregunta = $this->request->getVar('pregunta_'.$i);
+                $respuestaD = $this->request->getVar('respuestaD_'.$i);
+                $respuestaA = $this->request->getVar('respuestaA_'.$i);
+                $respuestaB = $this->request->getVar('respuestaB_'.$i);
+                $respuestaC = $this->request->getVar('respuestaC_'.$i);
+                $nota = $this->request->getVar('nota_'.$i);
 
-            }else{
-               // var_dump("ENTRA save");die;
-                $datos['error']='La pregunta ha sido guardada correctamente';
-                return view('cabecera').view('menuProfesor',$datos).view('pie');
+
+                //  var_dump($id_examen." -- ".$pregunta." -- ". $respuestaCorrecta." -- ". $respuestaA." -- ".$respuestaB." -- ".$respuestaB." -- ". $nota);die;
+                $id_preguntas = $profesorM->crear_pregunta($id_examen, $pregunta,$respuestaD,$respuestaA,$respuestaB,$respuestaC,$nota);
+
+                if($id_preguntas!=0){
+                 
+                   // var_dump("Ha habido un error");die;
+                    $datos['error']='Ha ocurrido un error al guardar la pregunta, intentalo en unos minutos o contacta con el administrador del servicio.';
+
+                    //var_dump($datos['error']);die;
+                    return view('cabecera').view('menuProfesor',$datos).view('pie');
+
+                }else{
+                    var_dump("SE HA PARADO AL GRABAR 1 PREGUNTA");
+                }
             }
+
+                     // var_dump("ENTRA save");die;
+                    $datos['error']='La pregunta ha sido guardada correctamente';
+                    return view('cabecera').view('menuProfesor',$datos).view('pie');
+            
+        }
+
+        public function ver_examen(){
+            $id_profesor=$this->id_profesor();
+            $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
+            $datos['cursos']=$this->buscar_curso($id_profesor);
+            $datos['profesorDatos']=$this->recuperar_cookie();
+            $profesorM = new profesorModelo();
+            $id_examen = $this->request->getVar('id_examen');
+            $nombreTema = $this->request->getVar('nombre');
+           
+            $preguntas =$profesorM->preguntas_tema($id_examen);
+            $examen = $profesorM->examen($id_examen);
+           
+
+           //var_dump($respuestasM);die;
+        if($preguntas!=null){
+            //var_dump($nombreTema);die;
+            //var_dump($examen);die;
+            $datos['preguntas']=$preguntas;
+            $datos['nombreTema']=$nombreTema;
+            $datos['examen']=$examen[0];
+            //$datos['respuestas']=$respuestasM;
+            //var_dump("NOMBRE DEL TEMA :".$datos['nombreTema']." examen ->".$examen."       y PREGUNTAS    ->". $datos['preguntas']);die;
+            return view('cabecera',$datos).view('examen',$datos).view('pie');
+
             
         }else{
-            var_dump("Ha habido un error");die;
-            $datos['error']='Ha ocurrido un error al guardar la pregunta, intentalo en unos minutos o contacta con el administrador del servicio.';
+            $datos['error']='No se ha encontrado el examen ';
+            return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
 
-            //var_dump($datos['error']);die;
-            return view('cabecera').view('menuProfesor',$datos).view('pie');
+        }
+        
 
         }
 
-            
+        public function borrar_examen(){
+            $id_profesor=$this->id_profesor();
+            $datos['cursoAlumnos']=$this->buscar_cursos_y_alumnos($id_profesor);
+            $datos['cursos']=$this->buscar_curso($id_profesor);
+            $datos['profesorDatos']=$this->recuperar_cookie();
+            $profesorM = new profesorModelo();
+            $id_examen = $this->request->getVar('id_examen');
+            //var_dump($id_examen);die;
+            $examen =$profesorM->examen_borrar($id_examen);
+            if($examen!=null){
+                $datos['error']='El tema se ha borrado correctamente';
+                return view('cabecera',$datos).view('menuProfesor',$datos).view('pie');
+    
+            }else{
+            $datos['error']='Ha ocurrido un error al borrar el tena, intentalo en unos minutos o contacta con el administrador del servicio.';
+    
+                //var_dump($datos['error']);die;
+                return view('cabecera').view('menuProfesor',$datos).view('pie');
+            }
+
         }
 
 

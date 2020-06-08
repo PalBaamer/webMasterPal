@@ -1,34 +1,41 @@
 
-  <body class="text-center">
-  <?php
+    <h1>Bienvenid@ <?php echo $alumnoDatos->nombre?></h1>
 
-    echo '<h1>Bienvenid@ '.$alumnoDatos[0]->nombre.'</h1>';
-    
-  ?>
-  
-<div>
-  <section>
-        <table class="table" style="width:100%">
-              <tr>
-                  <td>
-                      <div id="tabs" style="width:50%">
-                        <ul>
-                          <li><a href="#tabs-1">Crear Curso</a></li>
-                         
-                          <li><a href="#tabs-3">Buscar Curso</a></li>
-                        </ul>
-                      <div id="tabs-1">
-                        <form class="crearCurso">
-                          <p> <input type="submit" value="Crear"></p>
-                      </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div style="width:50%">
-                      <h1>PARTE 2</h1>
+  <section>      
+      <article>
+        <div id="tabs-1">
+        
+              <div class="warning alerta" >
+                    Haz click para apuntarte a cada curso.Necesitarás el código de acceso al curso.
+              </div>
+              <div class="grid-container">
+                <?php foreach($cursos as $nlinea => $valor){
+                  echo'<form class="form" method="POST" action="'.site_url('menuAlumno/acceso_nuevo_curso').'">
+                            <a class="boton" onclick="ActivarCampoOtroTema('.$valor->id_curso.');" > '.$valor->nombre.'</a>
+                            <br><input type="hidden" value="'. $valor->id_curso.'" name="id_curso"></br>
+                          <div id="clave_'.$valor->id_curso.'" style="display:none;">
+                            <fieldset>
 
-                      </div>
-                  </td>
-              </tr>
-        </table>
-</div>
+                                <label name="clave">Escribe la clave de acceso al curso :
+                                  <br><input type="text" name="clave"></br>
+                                  
+                                </label>
+                                <br>
+                              <input class="boton" type="submit" value="enviar" name="enviar"></br>
+                            </fieldset>
+                        
+                          </div>
+                        </form>';
+                }
+                ?>
+              </div>
+              </div>
+      </article> 
+     
+    </section>
+    <aside>
+      
+    <h3>Columna de la derecha</h3>
+    </aside>
+
+   

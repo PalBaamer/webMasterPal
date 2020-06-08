@@ -28,7 +28,7 @@
                             </form>
                           </div>
 
-                          
+                        <!-------------------------------------CURSO A EDITAR------------------------------------>  
                           <div id="tabs-2">
                               <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/ver_curso'); ?>">
                                     <h3 class="h3 mb-3 font-weight-normal">Elige el curso a editar:</h3>
@@ -60,6 +60,7 @@
 
                           
                           </div>
+
                           <div id="tabs-3">
                                 <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/buscar_alumno'); ?>">
                                 <h3 class="h3 mb-3 font-weight-normal">Escribe el nombre alumno</h3>
@@ -81,7 +82,8 @@
                       </div>
                   </td>
                   <td>
-                      <div style="width:50%">
+                    <!-------------------------------------CURSOS MEDIA Y N.ALUMNOS------------------------------------>
+                      <div>
                       <h3>TUS CURSOS</h3>
                       <table class="table table-striped .table-striped">
                                       <thead>
@@ -118,7 +120,7 @@
         </table>
         <div> 
        
-
+        <!-------------------------------------ENSEÑA EL ALUMNO BUSCADO---------------------->
                  <?php //var_dump($datosAlumno);die;
                           if($datosAlumno!=null){
                                             echo '<table class="table table-striped .table-striped">
@@ -134,102 +136,127 @@
 
                                               foreach ($datosAlumno as $nlinea => $valor) {
                                                 echo '
-                                                <tr><td scope="row">'.$nlinea.'</td><td> '.$valor->nombre.'</td><td>' . $valor->apellido1. '</td><td>' . $valor->apellido2. '</td><td>' . $valor->movil. '</td><td>' . $valor->email. '</td></tr>';
+                                                <tr><td scope="row">'.$nlinea.'</td>
+                                                    <td> '.$valor->nombre.'</td>
+                                                    <td>' . $valor->apellido1. '</td>
+                                                    <td>' . $valor->apellido2. '</td>
+                                                    <td>' . $valor->movil. '</td>
+                                                    <td>' . $valor->email. '</td></tr>';
                                             }
                                           echo '</thead>
                                             <tbody>
                                             </tbody>
                                           </table>';
                           }
+                ?>
+                <!--------------------------------------ENSEÑA LOS TEMAS QUE EXISTEN dentro del curso seleccionado---------------------->
+                <?PHP
                           if($datosCurso!=null){
                                   //var_dump($datosCurso[0]->nombreCurso);die;
                                   
-                                  echo '<h2>Curso de '.$datosCurso[0]->nombreCurso.'</h2>
+                                  echo '<h2>Curso de '.$nombre_curso.'</h2>
                                   
                                   <table class="table table-striped .table-striped">
                                                   <thead>
                                                     <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Nombre</th>
-                                                    <th scope="col"></th>
+                                                    <th scope="col" align="left">Nombre</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th scope="col" >Examen</th>
+                                                  </thead>
                                   ';
+
                                   foreach ($datosCurso as $nlinea => $valor) {
                                     echo '
                                     <tr>
                                       <td scope="row">'.$nlinea.'</td>
-                                      <td  align="left"> '.$valor->nombreTema.'<a href='.site_url('menuProfesor/ver_tema?id_tema='.$valor->id_tema.'').'>&nbsp &nbspVer</a><a href='.site_url('menuProfesor/editar_tema?id_tema='.$valor->id_tema.'').'>&nbsp &nbspEditar</a><a href="'.site_url('menuProfesor/borrarTema?id_tema='.$valor->id_tema.'').'">&nbsp &nbspBorrar</a></td>
-                                      
-                                      <td ><a href='.site_url('menuProfesor/editar_tema?id_tema='.$valor->id_tema.'').'><img src="'.base_url('img/llaveAzul-40.png').'" alt="add" width="30" height="30">Examen</></td >
+                                      <td  align="left"> '.$valor->nombre.'<td>
+                                      <td align="left"><a href='.site_url('menuProfesor/ver_tema?id_tema='.$valor->id_tema.'').'>&nbsp &nbspVer</a></td>
+                                      <td align="left"><a href='.site_url('menuProfesor/editar_tema?id_tema='.$valor->id_tema.'').'>&nbsp &nbspEditar</a></td>';
+
+                                        //------------------------ENSEÑA LA LLAVE DEL EXAMEN SI EXISTE------------------------
+                                      if($valor->id_examen!=null){
+
+                                      echo ' 
+                                      <td align="left"><a href="'.site_url('menuProfesor/borrarTema?id_tema='.$valor->id_tema.'&id_examen='.$valor->id_examen.'').'">&nbsp &nbspBorrar</a></td>
+                                      <td ><a href='.site_url('menuProfesor/ver_examen?id_examen='.$valor->id_examen.'&nombre='.$valor->nombre.'').'>
+                                            <img src="'.base_url('img/llaveAzul-40.png').'" alt="add" width="30" height="30">Examen</></a>
+                                      <a href="'.site_url('menuProfesor/borrar_examen?id_examen='.$valor->id_examen.'').'">&nbspBorra</a>
+                                     
+                                      </td>';
+                                      }else{
+                                        
+                                        echo '
+                                        <td align="left"><a href="'.site_url('menuProfesor/borrarTema?id_tema='.$valor->id_tema.'').'">&nbsp &nbspBorrar</a></td>
+                                        <td></td>
+                                        <td></td>';
+                                      }
+                                    echo '
                                     </tr>';
-                                    }
-                                  echo '</thead>
+                                  }
+                                    echo'
                                         <tbody>
                                         </tbody>
-                                      </table>
-                                      <div id="cajaAddTema">
+                                  </table>
+                                  <!-------------------------------------AÑADIR TEMA---------------------->     
+                                  <div id="cajaAddTema">
                                             <form class="form" class="form " method="POST" action="'.site_url('menuProfesor/addTema').'">
-                                                      
-                                                  <input id="prodId" name="inputCurso" type="hidden" value="'.$datosCurso[0]->id_curso.'">
 
-                                                  
+                                                  <input id="prodId" name="inputCurso" type="hidden" value='.$id_curso.'>                                                  
                                                   <h5> Introduce el nombre del nuevo tema :</h5>
                                                       <input type="text" class="form-control" name="inputInsertTema" placeholder="Nombre del tema">
                                                   
-                                                  
                                                   <button class="btn btn-lg btn-primary btn-block" type="submit" ><img src="'.base_url('img/add40.png').'" alt="add" width="30" height="30"> Tema nuevo</button>
 
-
                                             </form>
-                                      </div> 
-
-
-                                <div id="cajaExamen">
+                                      </div>'; 
+                                 //--------------------------------------AÑADIR EXAMEN PORQUE EXISTE TEMA--------------------------------------     
+                                echo'
+                              
+                                <div id="cajaExamen">';
+                                                  
+                                    if($datosCurso!=null){
+                                       echo'             
                                         <form class="form" class="form " method="POST" action="'.site_url('menuProfesor/crear_examen').'"> 
-                                                  <h5>AÑADE UN EXAMEN</h5>
-                                                  <label  >Selecciona a qué tema vas a añadir el examen : </label>
+                                                    <h5>AÑADE UN EXAMEN</h5>
+                                                    <label  >Selecciona a qué tema vas a añadir el examen : </label>
                                             <div class="dropdown" id="dropDowntemas">';
-                                                  if($datosCurso!=null){
-                                                          echo'<select class="custom-select" name="id_tema">';
-                                                              foreach ($datosCurso as $nlinea => $valor) {
+                                    echo'<select class="custom-select" name="id_tema">';
+                                    foreach ($datosCurso as $nlinea => $valor) {
+                                      if($valor->id_examen==null){
                                                                   //var_dump($valor->nombre);die;
-                                                                  echo '<option class="dropdown-item" value="' .$valor->id_tema.'">'.$valor->nombreTema.'</option>';
-                                                              }
+                                     echo '<option class="dropdown-item" value="' .$valor->id_tema.'">'.$valor->nombre.'</option>';
+                                      }
+                                    }
                                                           echo' </select>';
-                                                  }else{
+                                    }else{
                                                           echo' <button class="btn btn-secondary dropdown-toggle disabled" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-disabled="true">
                                                                       No existen Cursos
                                                                 </button>';                       
-                                                  }
-                                                          echo '
+                                    }
+                                    echo '
                                             </div>
                                                   
                                                   <label  >¿Qué tiempo límite tendrá ?</label><br>
                                                   <label id="tiempo"> Hora:</label>
-                                                      <div class="dropdown" >
-                                                          <select class="custom-select" name="tiempo_hora">
-                                                            <option class="dropdown-item" value="1">1</option>
-                                                            <option class="dropdown-item" value="2">2</option>
-                                                            <option class="dropdown-item" value="3">3</option>
-                                                            <option class="dropdown-item" value="4">4</option>
-                                                            <option class="dropdown-item" value="5">5</option>
-                                                            <option class="dropdown-item" value="6">6</option>
-                                                            <option class="dropdown-item" value="7">7</option>
-                                                          </select>
-                                                      </div>
+                                                  <input type="number" min="1" max="7" name="tiempo_hora" value="1" require>  
+
                                                   <label  id="tiempo">Minutos:</label>
-                                                      <div class="dropdown">
-                                                              <select class="custom-select" name="tiempo_minutos">
-                                                                  <option class="dropdown-item" value="1">00</option>
-                                                                  <option class="dropdown-item" value="2">15</option>
-                                                                  <option class="dropdown-item" value="3">30</option>
-                                                                  <option class="dropdown-item" value="4">45</option>
-                                                              </select>
-                                                      </div>
+                                                  <input type="number" min="00" max="45" name="tiempo_minutos" value="00" step="15" require> 
+                                                  <br> 
                                                           <label  >No tiene tiempo límite</label>&nbsp
                                                           <input type="checkbox" id="cbox1" name="noTiempo" value="si"> 
                                                           <br>
                                                           <label  >Nota mínima para aprobar : </label>
-                                                          <input type="number" min="5" max="10" name="nota" value="5" require>  
+                                                          <input type="number" min="1" max="10" name="notaMinima" value="5" require>
+                                                          <br>
+                                                          <label  >Nota máxima del examen : </label>
+                                                          <input type="number" min="1" max="10" name="notaMaxima" value="10" require>  
+                                                          <br>
+                                                          <label>Número de preguntas : </label>
+                                                          <input type="number" min="2" max="10" name="nPreguntas" value="2" require>    
 
                                                           <button class="btn btn-lg btn-primary btn-block" type="submit" ><img src="'.base_url('img/add40.png').'" alt="add" width="30" height="30"> Añadir examen</button>
                                               
@@ -237,6 +264,7 @@
                                 
                                 </div>';
                           }else{
+                            //--------------------------------------NO HAY TEMAS, INSERTA UNO--------------------------------------
                             if($id_curso!=null){
                                     echo '<h2>Curso '.$nombre_curso.'</h2>
                                     <div id="cajaAddTema">
@@ -255,65 +283,6 @@
                     ?>
                     
                      <p></p>
-                     <div id="cajaExamen">
-                                        <form class="form" class="form " method="POST" action="'.site_url('menuProfesor/crear_examen').'"> 
-                                                  <h5>AÑADE UN EXAMEN</h5>
-                                                  <label  >Selecciona a qué tema vas a añadir el examen : </label>
-                                            <div class="dropdown" id="dropDowntemas">
-                                                  <?php if($datosCurso!=null){
-                                                          echo'<select class="custom-select" name="id_tema">';
-                                                              foreach ($datosCurso as $nlinea => $valor) {
-                                                                  //var_dump($valor->nombre);die;
-                                                                  echo '<option class="dropdown-item" value="' .$valor->id_tema.'">'.$valor->nombreTema.'</option>';
-                                                              }
-                                                          echo' </select>';
-                                                  }else{
-                                                          echo' <button class="btn btn-secondary dropdown-toggle disabled" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-disabled="true">
-                                                                      No existen Cursos
-                                                                </button>';                       
-                                                  }
-                                                          ?>
-                                            </div>
-                                                  
-                                                  <label  >¿Qué tiempo límite tendrá ?</label><br>
-                                                  <label id="tiempo"> Hora:</label>
-                                                      <div class="dropdown" >
-                                                          <select class="custom-select" name="tiempo_hora">
-                                                            <option class="dropdown-item" value="1">1</option>
-                                                            <option class="dropdown-item" value="2">2</option>
-                                                            <option class="dropdown-item" value="3">3</option>
-                                                            <option class="dropdown-item" value="4">4</option>
-                                                            <option class="dropdown-item" value="5">5</option>
-                                                            <option class="dropdown-item" value="6">6</option>
-                                                            <option class="dropdown-item" value="7">7</option>
-                                                          </select>
-                                                      </div>
-                                                  <label  id="tiempo">Minutos:</label>
-                                                      <div class="dropdown">
-                                                              <select class="custom-select" name="tiempo_minutos">
-                                                                  <option class="dropdown-item" value="1">00</option>
-                                                                  <option class="dropdown-item" value="2">15</option>
-                                                                  <option class="dropdown-item" value="3">30</option>
-                                                                  <option class="dropdown-item" value="4">45</option>
-                                                              </select>
-                                                      </div>
-                                                          <label  >No tiene tiempo límite</label>&nbsp
-                                                          <input type="checkbox" id="cbox1" name="noTiempo" value="si"> 
-                                                          <br>
-                                                          <label  >Nota mínima para aprobar : </label>
-                                                          <input type="number" min="0" max="10" name="nota" value="1" require>
-                                                          <br>
-                                                          <label  >Nota máxima del examen : </label>
-                                                          <input type="number" min="0" max="10" name="nota" value="1" require>
-                                                          <br>
-                                                          <label  >¿cuántas preguntas tendrá el examen? </label>
-                                                          <input type="number" min="2" max="50" name="nota" value="2" require>
-
-                                                          <button class="btn btn-lg btn-primary btn-block" type="submit" ><img src="'.base_url('img/add40.png').'" alt="add" width="30" height="30"> Añadir examen</button>
-                                              
-                                        </form>
-                                
-                                </div>';
                     <p></p>
                     <p></p>
                     <p></p>
@@ -324,48 +293,4 @@
         </div>
         
 </div>
-<!----
-        <div id="historial">
-          <h3>Historial</h3>
-        <table class="table" style="width:100%">
-            <tr>
-              <th>Fecha/HORA</th>
-              <th>tipo</th>
-              <th>ubicación</th>
-              <th>Tiempo</th>
-            </tr>
-            <tr><!-?php/*
-          if($interpreteDatos==null){
-            echo '<th>No hay citas</th>
-                  </tr>';
-        }else{
-          if(isset( $historial)){
 
-          
-            foreach($historial as $Nlineas ){
-                 //var_dump($historial);die;
-              echo '<tr>
-              <input type="hidden" value="'.$Nlineas['id_citas'].'"  name="id_cita">
-              
-                    <td>'.$Nlineas['dia'].'  -  '.$Nlineas['hora_inicio'].'</td>
-                    <td>'.$Nlineas['centro'].'</td>
-                    <td>'.$Nlineas['especialidad'].'</td>
-                    <td>'.$Nlineas['total'].'</td>';
-                    
-                  if($Nlineas['dia'] > date('Y-m-d')){
-                    echo '<td><a href="'. base_url('index.php/MenuInterprete/llamada?id_cita='.$Nlineas['id_citas'].'').'">llamar</a></td>';
-                  }
-
-                  '</tr>';
-                 
-                            }
-                          }else{
-                            echo '<td>No hay citas</t>';
-                          }
-      }
-          
-          */?>
-
-        </div>
-          
-    </div>

@@ -31,12 +31,3 @@ function insertar_alumno($usuario){
 
 }
 
-
-/*function alumno_login($mail, $pswd){
-   $data = $this->db->query('select * from alumno where email="'.$mail.'" and pswd="'.$pswd .'"');
-  if ($data->num_rows() > 0){
-
-     return $data->row();
-  }
-  return null;
-}*/

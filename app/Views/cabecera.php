@@ -59,23 +59,23 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                  <a class="navbar-brand" href="<?php echo site_url('home/index'); ?>">
-                    <img class="mb-4" src="<?php echo base_url('img/color.png') ?>" alt="Icono de Inicio" width="72" height="72">
-                  </a>  
-              </li>
-              <li class="nav-item">
-              </li>
-              <li>
-                   
-              </li>
-        </ul>
-        <a class="navbar-brand" href="<?php echo site_url('home/cerrarSesion'); ?>">
-                    <img class="mb-4" src="<?php echo base_url('img/apagar.png') ?>" alt="Icono de Inicio" width="72" height="72">
-                  </a> 
-      </div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="navbar-brand" href="<?php echo site_url('home/index'); ?>">
+                      <img class="mb-4" src="<?php echo base_url('img/color.png') ?>" alt="Icono de Inicio" width="72" height="72">
+                    </a>  
+                </li>
+                <li class="nav-item">
+                </li>
+                <li>
+                    
+                </li>
+          </ul>
+          <a class="navbar-brand" href="<?php echo site_url('home/cerrarSesion'); ?>">
+                      <img class="mb-4" src="<?php echo base_url('img/apagar.png') ?>" alt="Icono de Inicio" width="72" height="72">
+                    </a> 
+        </div>
     </nav>
 
     

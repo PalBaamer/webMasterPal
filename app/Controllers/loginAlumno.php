@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\alumnoModelo;
+use App\Models\cursoModelo;
 use CodeIgniter\Controller;
 
 class loginAlumno extends BaseController {
@@ -33,8 +34,12 @@ class loginAlumno extends BaseController {
 			var_dump($r);*/
 			$alumno = $alumnoM->alumnoLogin($mail,$pswd);
 			
+			$cursos=$this->buscar_cursos();
+			
+			//var_dump($cursos);die;
+			$datos['cursos']=$cursos;
+
 			if($alumno!= null){
-				
 				set_cookie($cookie='datosSesion',$valor=serialize($alumno),$expire=12000);
 
 					/*$set_ookie = array(
@@ -45,15 +50,26 @@ class loginAlumno extends BaseController {
 						);*/
 						
 				$datos['alumnoDatos']=$alumno;
-				//var_dump($profesor);die;
-					return view('cabecera').view('menuAlumno',$datos);
+				return view('cabeceraAlumno').view('menuAlumno',$datos).view('pie');
 				
 
 			}else{
-			return view('cabeceraBasica').view('loginAlumno').view('ErrorLogin');
+				return view('cabeceraBasica').view('loginAlumno').view('ErrorLogin');
 
 			
-		}
-	} 
+			}
+		} 
+	}
+
+public function buscar_cursos(){
+	$cursosM = new cursoModelo();	
+	
+	$cursos= $cursosM->todo_cursos();
+	//var_dump($cursos);die;
+	if($cursos!=null){
+	   return $cursos;
+	}else{
+		return null;
+	}
 }
 }

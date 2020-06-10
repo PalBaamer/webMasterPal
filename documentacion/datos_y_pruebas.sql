@@ -283,6 +283,8 @@ select id_tema from tema where id_curso=12 and id_examen is not null;
 
 alter table examen add total_examen int(3);
 
+delete from evaluacion;
+
 insert into recurso ( id_tema,recurso)values(18,"<!doctype html>
 <html >  <head>
   <title>webMasterPal</title>
@@ -342,12 +344,36 @@ SELECT * FROM alumno_accede_curso aac right join curso c on(aac.id_curso=c.id_cu
 select distinct curso.id_curso,curso.nombre, tema.id_tema,tema.nombre from alumno_accede_curso,curso,tema 
 where alumno_accede_curso.id_alumno=6 and curso.id_curso=tema.id_curso and cuerpo_tema is not null order by curso.id_curso;
 
-select distinct curso.id_curso,curso.nombre from alumno_accede_curso,curso,tema 
-where alumno_accede_curso.id_alumno=6 and curso.id_curso=tema.id_curso and cuerpo_tema is not null order by curso.nombre;
 
-SELECT c.nombre as nombre FROM alumno_accede_curso aac join curso c on(aac.id_curso=c.id_curso) where aac.id_alumno=6 order by nombre;
+select distinct c.id_curso,c.nombre, t.id_tema,t.nombre,e.id_examen from alumno_accede_curso aac join curso c on(aac.id_curso=c.id_curso) join tema t on(c.id_curso=t.id_curso) join examen e on(e.id_tema=t.id_tema)
+where aac.id_alumno=4 and cuerpo_tema is not null order by c.nombre;
+SELECT distinct c.id_curso,c.nombre from alumno_accede_curso acc join curso c on(acc.id_curso=c.id_curso) join tema t on(c.id_curso=t.id_curso)
+                        where acc.id_alumno=4  and cuerpo_tema is not null order by c.nombre
+
+ t.cuerpo_tema,
+SELECT distinct c.id_curso as id_curso,t.id_tema,t.nombre,e.id_examen from alumno_accede_curso acc join curso c on(acc.id_curso=c.id_curso) join tema t on(c.id_curso=t.id_curso) left join examen e on(e.id_tema=t.id_tema)
+where acc.id_alumno=4 and  cuerpo_tema is not null order by c.nombre
 
 
+select t.nombre,e.id_examen from tema t left join examen e on(e.id_tema=t.id_tema) where cuerpo_tema is not null and t.id_curso=12;
+
+
+SELECT c.nombre as nombre FROM alumno_accede_curso acc join curso c on(acc.id_curso=c.id_curso) where acc.id_alumno=6 order by nombre;
+
+SELECT * from examen join preguntas on(examen.id_examen=preguntas.id_examen) where preguntas.id_examen=103;
+
+alter table evaluacion add nota int(2);
+ALTER TABLE Persons ADD PRIMARY KEY (id_pregunta int(4));
+
+alter table preguntas add id_pregunta int (4) primary keyAUTO_INCREMENT,;
+ALTER TABLE preguntas ADD id_pregunta int(4) PRIMARY KEY not null;
+ALTER TABLE preguntas DROP PRIMARY KEY;
+ALTER TABLE preguntas drop FOREIGN KEY (id_examen);
+ALTER TABLE preguntas DROP FOREIGN KEY 'respuesta_del_examen';
+
+select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE TABLE_NAME='preguntas';
+
+alter table preguntas drop foreign key respuesta_del_examen;
 
 
 <script type="text/javascript">

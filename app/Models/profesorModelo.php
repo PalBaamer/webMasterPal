@@ -180,16 +180,6 @@ protected $table = "profesor";
          return $results;
       }
 
-      function ver_tema($id_tema){
-         $db=\Config\Database::connect();
-         //var_dump("LLEGA");die;
-        //var_dump("SELECT cuerpo_tema from tema where id_tema=".$id_tema."");die;
-         $query = $db->query("SELECT cuerpo_tema from tema where id_tema=$id_tema");
-        
-         $results = $query->getResult();
-         //var_dump($results);die;
-         return $results;
-      }
 
       function insertar_examen($id_tema , $tiempo, $notaMinima,$notaMaxima){
          $db=\Config\Database::connect();
@@ -256,6 +246,7 @@ protected $table = "profesor";
 
 
       }
+
 
 }
 

@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\alumnoModelo;
+use App\Models\cursoModelo;
 use App\Models\profesorModelo;
 use CodeIgniter\Controller;
 
@@ -315,10 +316,11 @@ public function crearCurso(){
         $datos['cursos']=$this->buscar_curso($id_profesor);
         $datos['profesorDatos']=$this->recuperar_cookie();
         $profesorM = new profesorModelo();
+        $cursoM = new cursoModelo();
         
         $id_tema= $this->request->getVar('id_tema');
        
-        $cuerpoTema =$profesorM->ver_tema($id_tema);
+        $cuerpoTema =$cursoM->ver_tema($id_tema);
         //var_dump($cuerpoTema);die;
         if($cuerpoTema!=null){
             //var_dump("ENTRA");die;
@@ -553,6 +555,9 @@ public function crearCurso(){
             }
 
         }
+
+        
+      
 
 
 

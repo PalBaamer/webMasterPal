@@ -71,8 +71,8 @@
 	font-size: 30px;
 	text-align: center;
   }
-  /*--------------------BOTON------------*/
-  
+  /*--------------------BOTONES------------*/
+  /*BOTON SELECCION*/
   .boton {
 	background-color: #FA8072;
 	border: none;
@@ -101,6 +101,37 @@
 	border: 2px solid #FFA07A;
   }
   
+/*BOTON ATRAS*/
+.botonAtras{
+	background-color: blue;
+	border: 2px solid blue;
+	color: white;
+	padding: 0% 1%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px;
+	transition-duration: 0.4s;
+	border-radius: 8px;
+}
+
+/*BOTON EXAMEN*/
+.botonExamen{
+	background-color: rgb(112, 185, 112);
+	border: 2px solid rgb(112, 185, 112);
+	color: white;
+	padding: 0% 1%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px;
+	transition-duration: 0.4s;
+	border-radius: 4px;
+	margin-right: -50%;
+}
+
 
 
   /*--------------------ALERTAS------------*/
@@ -145,7 +176,35 @@
   }
   
 
+  /*--------------------TABLA------------*/
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+  }
   
- 
+  td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+  }
   
+  tr:nth-child(even) {
+	background-color: #dddddd;
+	padding: 20px;
+  }
+
+  
+
+/*--------------------CRONOMETRO------------*/
+#tiempo{
+	background-color: green; 
+	border-radius: 3px;
+}
+  
+.form_examen{
+	margin: 3%;
+
+}
   

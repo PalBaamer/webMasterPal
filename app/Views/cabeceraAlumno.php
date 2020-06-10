@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link href="<?php echo base_url('css/alumno.css') ?>" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+  <!--link rel="stylesheet" href="/resources/demos/style.css"-->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    
@@ -23,15 +23,16 @@
         </script>
 
         <script>
-                <?php 
+                function error() {
+                    <?php 
                 if($error!=null){
                 
-                    echo 'function error() {
-                        window.alert("'.$error.'");
-                    }';
-                    $error=null;
+                       echo' window.alert("'.$error.'");';
+                        $error=null;
+                    }?>
+                    
                     }
-                ?>
+                
         </script>
         <script>
                 function sinCursos(alerta){
@@ -44,9 +45,13 @@
   } );
   </script>
 
+
+
+
+
     </head>
 
-    <body onload="error()">
+    <body onload="error()";>
     <header>
         <a class="inicioImg" href="<?php echo site_url('home/index'); ?>">
                       <img src="<?php echo base_url('img/color.png') ?>" alt="Icono de Inicio" width="72" height="72">

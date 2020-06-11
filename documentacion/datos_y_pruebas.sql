@@ -285,6 +285,10 @@ alter table examen add total_examen int(3);
 
 delete from evaluacion;
 
+select distinct curso.nombre,tema.nombre,examen.puntos_para_aprobar,evaluacion.nota 
+from evaluacion join examen on(evaluacion.id_examen=examen.id_examen) left join tema on (tema.id_tema=examen.id_tema) right join curso on (tema.id_curso=curso.id_curso) 
+where evaluacion.id_alumno=4;
+
 insert into recurso ( id_tema,recurso)values(18,"<!doctype html>
 <html >  <head>
   <title>webMasterPal</title>

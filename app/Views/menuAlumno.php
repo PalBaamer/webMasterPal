@@ -35,7 +35,7 @@
     </section>
     <aside>
       
-    <h3>Columna de la derecha</h3>
+    <h3></h3>
     </aside>
 
    

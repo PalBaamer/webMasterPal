@@ -5,7 +5,7 @@
         <article>
         <h3>Mis cursos</h3>
             <?php
-
+        //var_dump($cursosProcesando."     y     ".$cursosCompletos);die;
                 if(empty($cursosProcesando)){
 
                 $alerta="No hay cursos registrados";

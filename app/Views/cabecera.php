@@ -43,6 +43,36 @@
           ?>
  </script>
 
+ <script>
+
+   /*function confirmacionBorrar(){
+        var mensaje;
+        var opcion = confirm("¿Seguro que quieres borrar el elemento?");
+        if (opcion == true) {
+            mensaje = "Has clickado OK";
+      } else {
+          mensaje = "Has clickado Cancelar";
+      }
+      document.getElementById("borrar").innerHTML = mensaje;
+
+   }*/
+   pag;
+   function confirmacionBorrar(url){
+     console.log("El prarametro recibido es: "+url);
+     break pag;
+    var op =confirm("Seguro que quieres borrar el elemento?");
+        if(op){
+          
+            document.location = url;
+          /*<?php //site_url('menuProfesor/borrar_examen?id_examen='.url)?>*/
+        }else{
+          mensaje = "El elemento no se borrará";
+        }
+    }
+</script>
+
+ </script>
+
     <!-- Custom styles for this template -->
   </head>
 

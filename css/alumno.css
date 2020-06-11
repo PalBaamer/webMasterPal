@@ -198,9 +198,10 @@ table {
   
 
 /*--------------------CRONOMETRO------------*/
-#tiempo{
-	background-color: green; 
-	border-radius: 3px;
+#demo{
+	
+	padding: 0% 1%;
+	margin: 3%;
 }
   
 .form_examen{

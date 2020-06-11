@@ -46,7 +46,7 @@ var x = setInterval(function() {
 
 
 <section>  
-        <article  onload="alert('Ejecuta OK2')";>
+        <article>
        <!-- cronometroStart(<?= $examen[0]->tiempo_examen?>)";-->
        <?php
           if($examenH==null){
@@ -56,7 +56,7 @@ var x = setInterval(function() {
         ?>
         <h5>Hola <?php echo $alumnoDatos->nombre?></h5> 
                 <div class="warning alerta" >
-                        <?php echo 'El examen consta de X preguntas con un total máximo de '.$examen[0]->total_examen.' puntos.
+                        <?php echo 'El examen tiene un total máximo de '.$examen[0]->total_examen.' puntos.
                             Se deberá superar el '.$examen[0]->puntos_para_aprobar.'0% del examen para que esté aprobado.
                             Tiempo del examen '.$examen[0]->tiempo_examen.'<br>';
                             
@@ -68,6 +68,9 @@ var x = setInterval(function() {
                 </div>';
                 if($examenH==null){
                 echo'<a class="botonExamen" href="'.site_url('menuAlumno/empezar_examen?id_examen='.$examen[0]->id_examen.'').'" role="button"> Empezar Examen</a>';
+                }else{
+                  echo'<div id="demo" onload="cronometroStart()";>
+                  </div>';
                 }
                             ?>
                 <div class="form_examen">
@@ -91,7 +94,7 @@ var x = setInterval(function() {
                             //var_dump($examenH);die;
                             echo'
                             <div>
-                                <h5>'/*pregunta*/ .($nlinea+1).'.-'.$valor->pregunta.' ('.$valor->puntuacion.'p.)</h5>
+                                <h3>'/*pregunta*/ .($nlinea+1).'.-'.$valor->pregunta.' ('.$valor->puntuacion.'p.)</h3>
                                 
                                 <input id="prodId" name="id_pregunta_'.$nlinea.'" type="hidden" value="'.$examenH[$nlinea]->id_pregunta.'">
                                 <input id="prodId" name="nota_'.$nlinea.'" type="hidden" value="'.$valor->puntuacion.'">';

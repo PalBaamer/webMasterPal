@@ -129,11 +129,11 @@ protected $table = "profesor";
       }
 
 
- //-------EL PROFESO BUSCA CREA UN NUEVO CURSO
-      function insert_curso($nombre_Curso, $id_profesor){
+ //-------EL PROFESOR CREA UN NUEVO CURSO
+      function insert_curso($nombre_Curso, $id_profesor,$pswd){
          $db=\Config\Database::connect();
          
-         $queryInsert = $db->query('INSERT into curso (nombre,id_profesor)values("'.$nombre_Curso.'",'.$id_profesor.')');
+         $queryInsert = $db->query('INSERT into curso (nombre,id_profesor,pswd)values("'.$nombre_Curso.'",'.$id_profesor.','.$pswd.')');
          $id_tema=$db->insertID();
          //insert_id
          return $id_tema;
@@ -194,8 +194,8 @@ protected $table = "profesor";
 
       public function crear_pregunta($id_examen, $pregunta,$respuestaA,$respuestaB,$respuestaC,$respuestaD,$nota){
          $db=\Config\Database::connect();
-        //("INSERT into preguntas values(".$id_examen.",'".$pregunta."','".$respuestaA."','".$respuestaB."','".$respuestaC."','".$respuestaCorrecta."',".$nota.")");die;
-         $queryInsert = $db->query(" INSERT into preguntas values(".$id_examen.",'".$pregunta."','".$respuestaA."','".$respuestaB."','".$respuestaC."','".$respuestaD."',".$nota.")");
+         //var_dump("INSERT into preguntas (id_examen, pregunta,respuestaA,respuestaB,respuestaC,respuestaD,puntuacion) values(".$id_examen.",'".$pregunta."','".$respuestaA."','".$respuestaB."','".$respuestaC."','".$respuestaD."',".$nota.")");die;
+         $queryInsert = $db->query(" INSERT into preguntas (id_examen, pregunta,respuestaA,respuestaB,respuestaC,respuestaD,puntuacion) values(".$id_examen.",'".$pregunta."','".$respuestaA."','".$respuestaB."','".$respuestaC."','".$respuestaD."',".$nota.")");
          $results = $db->insertID();
         // var_dump($results );die;
          return $results;
@@ -205,7 +205,7 @@ protected $table = "profesor";
 
       public function obtener_temas_examen($id_curso){
          $db=\Config\Database::connect();
-        // var_dump("select tema.id_tema, tema.nombre, examen.id_examen from tema, examen where examen.id_tema=tema.id_tema and tema.id_curso=".$id_curso.";");die;
+        //var_dump("select tema.id_tema, tema.nombre, examen.id_examen from tema, examen where examen.id_tema=tema.id_tema and tema.id_curso=".$id_curso.";");die;
          $query = $db->query("SELECT t.id_tema, t.nombre, e.id_examen from tema t left join examen e on(e.id_tema=t.id_tema) where t.id_curso=".$id_curso."");
 
          $results = $query->getResult();

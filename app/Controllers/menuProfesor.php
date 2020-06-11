@@ -225,11 +225,12 @@ public function crearCurso(){
 
         $nombreCurso= $this->request->getVar('inputInsertCurso');
         $temaNombre= $this->request->getVar('inputInsertTema');
+        $pswd= $this->request->getVar('pswd');
         if($nombreCurso!=null || $temaNombre!=null){
             $existe_curso=$profesorM->buscar_curso($nombreCurso);
      
             if($existe_curso==null){
-                $id_Curso=$profesorM->insert_curso($nombreCurso,$id_profesor);
+                $id_Curso=$profesorM->insert_curso($nombreCurso,$id_profesor,$pswd);
                 $datos['id_curso']=$id_Curso;
                 $datos['temaNombre']=$temaNombre;
     
@@ -268,7 +269,7 @@ public function crearCurso(){
         $datos['temaNombre']=$temaNombre;
         
        // var_dump($id_curso." y ".$temaNombre);die;
-        return view('editarCurso',$datos);
+        return view('cabecera',$datos).view('editarCurso',$datos).view('pie');
 
 
     }
@@ -467,7 +468,6 @@ public function crearCurso(){
         $profesorM = new profesorModelo();
         $id_examen = $this->request->getVar('id_examen');
         $n_preguntas = $this->request->getVar('n_preguntas');
-       
             for ($i=0; $i <$n_preguntas ; $i++) { 
         
                 $pregunta = $this->request->getVar('pregunta_'.$i);
@@ -478,9 +478,31 @@ public function crearCurso(){
                 $nota = $this->request->getVar('nota_'.$i);
 
 
-                //  var_dump($id_examen." -- ".$pregunta." -- ". $respuestaCorrecta." -- ". $respuestaA." -- ".$respuestaB." -- ".$respuestaB." -- ". $nota);die;
-                $id_preguntas = $profesorM->crear_pregunta($id_examen, $pregunta,$respuestaD,$respuestaA,$respuestaB,$respuestaC,$nota);
+                //var_dump($id_examen." -- ".$pregunta." -- ". $respuestaD." -- ". $respuestaA." -- ".$respuestaB." -- ".$respuestaB." -- ". $nota);die;
+                if(strpos($pregunta, "'")){
+                   // var_dump(str_replace("'", "\'",$pregunta));die;
+                   $pregunta=str_replace("'", "\'",$pregunta);
+                }
+                if(strpos($respuestaD, "'")){
+                    $respuestaD=str_replace("'", "\'",$respuestaD);
+                 }
+                 if(strpos($respuestaA, "'")){
+                    $respuestaA=str_replace("'", "\'",$respuestaA);
+                 }
+                 if(strpos($respuestaB, "'")){
+                    $respuestaB=str_replace("'", "\'",$respuestaB);
+                 }
+                 if(strpos($respuestaC, "'")){
+                    $respuestaC=str_replace("'", "\'",$respuestaC);
+                 }
 
+
+                // var_dump(str_replace("'", "\'",$respuestaC));die;
+
+
+
+                $id_preguntas = $profesorM->crear_pregunta($id_examen, $pregunta,$respuestaD,$respuestaA,$respuestaB,$respuestaC,$nota);
+                //var_dump($id_preguntas);die;
                 if($id_preguntas!=0){
                  
                    // var_dump("Ha habido un error");die;

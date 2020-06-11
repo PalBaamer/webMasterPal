@@ -48,15 +48,17 @@ class menuAlumno extends BaseController{
          $datos['cursos']=$cursos;
 
         $id_alumno=$alumnoDatos->id_alumno;
+        
         $cursosProcesando= $cursosM->cursos_en_proceso_no_vacios($id_alumno);
                     //var_dump("Curso procesado".$cursosProcesando);die;
                     //var_dump($cursosProcesando);die;
         $cursosCompletos= $cursosM->contenido_curso($id_alumno);
-        $listaExamenesAlumno=$alumnoM->evaluacion($id_alumno);    
+        //var_dump($cursosCompletos."           y              ".$cursosProcesando);die;
+        //$listaExamenesAlumno=$alumnoM->evaluacion($id_alumno);  
+        //$datos['cursosProcesando']=$cursosProcesando;
         $datos['cursosProcesando']=$cursosProcesando;
        $datos['cursosCompletos']=$cursosCompletos;
-
-
+            //var_dump("LLEGA");die;
 
 		return view('cabeceraAlumno',$datos).view('misCursos',$datos).view('pie');
     }
@@ -301,6 +303,31 @@ class menuAlumno extends BaseController{
             
                     return view('cabeceraAlumno',$datos).view('misCursos',$datos).view('pie');
                 }
+        }
+
+        public function notas(){
+        helper('cookie');
+		helper('array');
+        
+        $cursosM = new cursoModelo();
+        $alumnoM = new alumnoModelo();
+        //CARGAR MENU DEL PROFESOR
+       //var_dump('entra en el index de menu profesor');die;
+       //OBTIENES LOS DATOS DEL PROFESOR COMPLETO
+         $alumnoDatos = $this->datosAlumno();
+         
+         //ar_dump($alumnoDatos);die;
+         $datos['alumnoDatos']=$alumnoDatos;
+         $alumnoNotas = $alumnoM->obtener_notas($alumnoDatos->id_alumno);
+
+            if($alumnoDatos!=null){
+                $datos['alumnoNotas']=$alumnoNotas;
+                return view('cabeceraAlumno',$datos).view('notas',$datos).view('pie');
+            }else{
+                $datos['error']="No has realizado ningún examen";
+                $this->misCursos();
+            }
+
         }
 
         

@@ -21,9 +21,12 @@
                           <div id="tabs-1">
                             <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/crear_curso'); ?>">
                             <h3 class="h3 mb-3 font-weight-normal">Introduce el nombre del curso :</h3>
-                            <input type="text" class="form-control" name="inputInsertCurso" placeholder="Nombre del curso">
+                            <input type="text" class="form-control" name="inputInsertCurso" placeholder="Nombre del curso" require>
                             <h3 class="h3 mb-3 font-weight-normal">Introduce el nombre del tema :</h3>
-                            <input type="text" class="form-control" name="inputInsertTema" placeholder="Nombre del primer tema ">
+                            <input type="text" class="form-control" name="inputInsertTema" placeholder="Nombre del primer tema " require>
+                            <br>
+                            <label>Introduce la contraseña del curso : </label>
+                            <input type="number" min="2" max="9999" name="pswd" value="1111" require>    
                               <p> <input type="submit" value="Crear"></p>
                             </form>
                           </div>
@@ -32,7 +35,7 @@
                           <div id="tabs-2">
                               <form class="form" class="form " method='POST' action="<?php echo site_url('menuProfesor/ver_curso'); ?>">
                                     <h3 class="h3 mb-3 font-weight-normal">Elige el curso a editar:</h3>
-                                          <div class="dropdown">
+                                          <div id="volver" class="dropdown">
                                             
                                               <?php
                                                   if($cursos!=null){
@@ -178,12 +181,13 @@
 
                                         //------------------------ENSEÑA LA LLAVE DEL EXAMEN SI EXISTE------------------------
                                       if($valor->id_examen!=null){
-
+// <a id="borrar" href="" onclick=confirmacionBorrar("menuProfesor/borrar_examen?id_examen='.$valor->id_curso.'");>&nbspBorra</a>
+//<a id="borrado" href="'.site_url('menuProfesor/borrar_examen?id_examen='.$valor->id_examen.'').'">&nbspBorra</a>
                                       echo ' 
                                       <td align="left"><a href="'.site_url('menuProfesor/borrarTema?id_tema='.$valor->id_tema.'&id_examen='.$valor->id_examen.'').'">&nbsp &nbspBorrar</a></td>
                                       <td ><a href='.site_url('menuProfesor/ver_examen?id_examen='.$valor->id_examen.'&nombre='.$valor->nombre.'').'>
                                             <img src="'.base_url('img/llaveAzul-40.png').'" alt="add" width="30" height="30">Examen</></a>
-                                      <a href="'.site_url('menuProfesor/borrar_examen?id_examen='.$valor->id_examen.'').'">&nbspBorra</a>
+                                            <button id="borrar" onclick=confirmacionBorrar("menuProfesor/borrar_examen?id_examen='.$valor->id_curso.'");>&nbspBorra</button>
                                      
                                       </td>';
                                       }else{
@@ -246,19 +250,19 @@
                                                   <label  id="tiempo">Minutos:</label>
                                                   <input type="number" min="00" max="45" name="tiempo_minutos" value="00" step="15" require> 
                                                   <br> 
-                                                          <label  >No tiene tiempo límite</label>&nbsp
-                                                          <input type="checkbox" id="cbox1" name="noTiempo" value="si"> 
-                                                          <br>
-                                                          <label  >Nota mínima para aprobar : </label>
-                                                          <input type="number" min="1" max="10" name="notaMinima" value="5" require>
-                                                          <br>
-                                                          <label  >Nota máxima del examen : </label>
-                                                          <input type="number" min="1" max="10" name="notaMaxima" value="10" require>  
-                                                          <br>
-                                                          <label>Número de preguntas : </label>
-                                                          <input type="number" min="2" max="10" name="nPreguntas" value="2" require>    
+                                                  <label  >No tiene tiempo límite</label>&nbsp
+                                                  <input type="checkbox" id="cbox1" name="noTiempo" value="si"> 
+                                                  <br>
+                                                  <label  >Nota mínima para aprobar : </label>
+                                                  <input type="number" min="1" max="10" name="notaMinima" value="5" require>
+                                                  <br>
+                                                  <label  >Nota máxima del examen : </label>
+                                                  <input type="number" min="1" max="10" name="notaMaxima" value="10" require>  
+                                                  <br>
+                                                  <label>Número de preguntas : </label>
+                                                  <input type="number" min="2" max="10" name="nPreguntas" value="2" require> 
 
-                                                          <button class="btn btn-lg btn-primary btn-block" type="submit" ><img src="'.base_url('img/add40.png').'" alt="add" width="30" height="30"> Añadir examen</button>
+                                              <button class="btn btn-lg btn-primary btn-block" type="submit" ><img src="'.base_url('img/add40.png').'" alt="add" width="30" height="30"> Añadir examen</button>
                                               
                                         </form>
                                 
